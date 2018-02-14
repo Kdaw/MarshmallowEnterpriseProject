@@ -30,6 +30,9 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.8.0'
     //firebase database dependancy
     compile 'com.google.firebase:firebase-database:11.8.0'
+    compile 'com.google.firebase:firebase-auth:11.8.0'
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
+
 
     //todo - ask about licensing with tyrone
     //https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field

@@ -1,19 +1,19 @@
 package com.example.karld.marshmallowenp;
 
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
-
 import android.view.View;
-
 import android.widget.Button;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class CreatePostActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //todo-all of this
+    //todo Get CreatePostActivity to write to the database
+    //todo Get correct data from gareth of what needs to be in post
+    //todo Use karl's authentication for the user info for foreign key
+    //todo Decide how to layout data within database
+    //todo Finish CreatePostActivity
     //create post page that is linked from home screen to allow user to create post
     //below is help and roughly what to do
     //https://github.com/firebase/quickstart-android/blob/master/database/app/src/main/java/
@@ -78,12 +78,16 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     calls get ID method associated with each login type
     for database management to link posts to user
      */
-    public static String getLoginID()
+    public static String getUserID()
     {
-        return "TestUser1";
+        //todo make this method work off the firebase user id to actually check...
+        //what is being used and get the ID instead of being hard coded
+        //return "TestUser1";
+
+
+        FirebaseUser user =  mAuth.getCurrentUser();
+        String userId = user.getUid();
     }
-
-
 
 
     @Override
@@ -95,7 +99,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
         Button postButton;
         //todo - figure out symbol issue - FIXED
-        postButton = (Button) findViewById(R.id.button3);
+        postButton = (Button) findViewById(R.id.CreatePostButton);
         postButton.setOnClickListener(CreatePostActivity.this);
     }
 
@@ -104,22 +108,11 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v)
     {
 
-        //read from text boxes and set to variable for parameter for new post
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
-
-        //this is where the onclick method would call the getLoginId method to get the correct id
-        // depending on login type, ie google, email etc
-        //would then be saved to be passed through to the .child below so that posts are linked beneath user
-
-//        FirebaseUser user =  mAuth.getCurrentUser();
-//        String userId = user.getUid();
-
         Post post = new Post("TestPost1","TestDescription1",getLoginID());
 
         //todo - add validation to prevent duplication of users in database - potentially not the way i'll be doing it
-        //todo - pass userID through as a column in the database instead of a heading in db
-        // will reduce post load times and might be neater
-        // think more about how to layout the posts in the database
+
         DatabaseReference mRef =  database.getReference().child("Posts")/*.child(getLoginID)*/;
         mRef.setValue(post);
     }
@@ -129,3 +122,5 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
 //button click listener
 // https://stackoverflow.com/questions/20156733/how-to-add-button-click-event-in-android-studio
+//Writing to database
+//https://stackoverflow.com/questions/39536517/write-new-data-in-android-firebase-database
