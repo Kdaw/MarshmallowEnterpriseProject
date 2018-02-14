@@ -24,19 +24,21 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     {
         public String postTitle;
         public String postDescription;
+        public String PostOwner; //foreign key (kinda)
 
 
         //Default Constructor
-        public post()
+        public Post()
         {
 
         }
 
         //Constructor with parameters
-        public post(String title, String description)
+        public Post(String title, String description, String owner)
         {
-            this.title = postTitle;
-            this.description = postDescription;
+            title = postTitle;
+            description = postDescription;
+            owner = PostOwner;
         }
 
         public String getPostTitle()
@@ -46,7 +48,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
         public void setPostTitle(String title)
         {
-            this.title = postTitle;
+            title = postTitle;
         }
 
         public String getPostDescription()
@@ -56,7 +58,17 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
         public void setPostDescription(String description)
         {
-            this description = postDescription;
+            description = postDescription;
+        }
+
+        public String getPostOwner()
+        {
+            return PostOwner;
+        }
+
+        public void setPostOwner(String owner)
+        {
+            owner = PostOwner;
         }
     }
 
@@ -66,23 +78,24 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     calls get ID method associated with each login type
     for database management to link posts to user
      */
-    public static void getLoginID
+    public static String getLoginID()
     {
-        //todo - hard code in user values for now so this method can be used in onclick
+        return "TestUser1";
     }
 
 
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
 
         Button postButton;
-        //todo - figure out symbol issue
-        postButton = (Button) findViewById(R.id.postButton);
+        //todo - figure out symbol issue - FIXED
+        postButton = (Button) findViewById(R.id.button3);
         postButton.setOnClickListener(CreatePostActivity.this);
     }
 
@@ -94,16 +107,17 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         //read from text boxes and set to variable for parameter for new post
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
-        //this is where the onclick method would call the getloginId method to get the correct id
+        //this is where the onclick method would call the getLoginId method to get the correct id
         // depending on login type, ie google, email etc
         //would then be saved to be passed through to the .child below so that posts are linked beneath user
+
 //        FirebaseUser user =  mAuth.getCurrentUser();
 //        String userId = user.getUid();
 
-        Post post = new Post("TestPost1","TestDescription1");
+        Post post = new Post("TestPost1","TestDescription1",getLoginID());
 
-        //todo - add validation to prevent duplication of users in database - potenially not the way i'll be doing it
-        //todo - pass userid through as a column in the database instead of a heading in db
+        //todo - add validation to prevent duplication of users in database - potentially not the way i'll be doing it
+        //todo - pass userID through as a column in the database instead of a heading in db
         // will reduce post load times and might be neater
         // think more about how to layout the posts in the database
         DatabaseReference mRef =  database.getReference().child("Posts")/*.child(getLoginID)*/;

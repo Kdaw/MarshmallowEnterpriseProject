@@ -19,6 +19,10 @@
         <activity
             android:name=".CreatePostActivity"
             android:label="@string/title_activity_create_post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewPostActivity"
+            android:label="@string/title_activity_view_post"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
