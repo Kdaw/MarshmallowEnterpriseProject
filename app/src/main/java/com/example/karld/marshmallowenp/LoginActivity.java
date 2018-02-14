@@ -3,6 +3,7 @@ package com.example.karld.marshmallowenp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -120,12 +121,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     //TODO work out the real logic here
     private void updateUI(GoogleSignInAccount account) {
         if(account != null) {
-            //go to main page
+            loadHome();
         }
-        else{
-            //update page for login
-        }
+//        else{
+//            //update page for login
+//        }
 
+    }
+
+    private void loadHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void populateAutoComplete() {
