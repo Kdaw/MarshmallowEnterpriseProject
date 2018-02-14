@@ -68,7 +68,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
      */
     public static void getLoginID
     {
-        //todo
+        //todo - hard code in user values for now so this method can be used in onclick
     }
 
 
@@ -81,6 +81,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
 
         Button postButton;
+        //todo - figure out symbol issue
         postButton = (Button) findViewById(R.id.postButton);
         postButton.setOnClickListener(CreatePostActivity.this);
     }
@@ -93,10 +94,18 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         //read from text boxes and set to variable for parameter for new post
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
 
+        //this is where the onclick method would call the getloginId method to get the correct id
+        // depending on login type, ie google, email etc
+        //would then be saved to be passed through to the .child below so that posts are linked beneath user
 //        FirebaseUser user =  mAuth.getCurrentUser();
 //        String userId = user.getUid();
 
         Post post = new Post("TestPost1","TestDescription1");
+
+        //todo - add validation to prevent duplication of users in database - potenially not the way i'll be doing it
+        //todo - pass userid through as a column in the database instead of a heading in db
+        // will reduce post load times and might be neater
+        // think more about how to layout the posts in the database
         DatabaseReference mRef =  database.getReference().child("Posts")/*.child(getLoginID)*/;
         mRef.setValue(post);
     }
