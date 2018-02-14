@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.karld.marshmallowenp.LoginActivity">
 
+
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -72,6 +73,12 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
