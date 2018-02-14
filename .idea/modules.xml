@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///home/scm-studs/s6105214/AndroidStudioProjects/marshmallow-myfork/app/app.iml" filepath="/home/scm-studs/s6105214/AndroidStudioProjects/marshmallow-myfork/app/app.iml" />
-      <module fileurl="file:///home/scm-studs/s6105214/AndroidStudioProjects/marshmallow-myfork/marshmallow-myfork.iml" filepath="/home/scm-studs/s6105214/AndroidStudioProjects/marshmallow-myfork/marshmallow-myfork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ENP-Marshmallow-fork.iml" filepath="$PROJECT_DIR$/.idea/ENP-Marshmallow-fork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://\home\scm-studs\s6105214\AndroidStudioProjects\marshmallow-myfork\app\app.iml" filepath="\home\scm-studs\s6105214\AndroidStudioProjects\marshmallow-myfork\app\app.iml" />
+      <module fileurl="file://\home\scm-studs\s6105214\AndroidStudioProjects\marshmallow-myfork\marshmallow-myfork.iml" filepath="\home\scm-studs\s6105214\AndroidStudioProjects\marshmallow-myfork\marshmallow-myfork.iml" />
     </modules>
   </component>
 </project>

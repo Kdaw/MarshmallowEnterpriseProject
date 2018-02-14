@@ -2,4 +2,6 @@
     <string name="app_name">MarshmallowENP</string>
     <string name="title_activity_create_post">CreatePost</string>
     <string name="CreatePostButton">Create Post</string>
+    <string name="PostTitleText">Enter Post Title</string>
+    <string name="PostDescriptionText">Enter Post Description</string>
 </resources>
