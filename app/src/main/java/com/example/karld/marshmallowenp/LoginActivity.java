@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void updateUI(GoogleSignInAccount account) {
         if(account != null) {
             //TODO uncomment below line once testing completes
-            loadHome();
+            //loadHome();
         }
 //        else{
 //            //update page for login
