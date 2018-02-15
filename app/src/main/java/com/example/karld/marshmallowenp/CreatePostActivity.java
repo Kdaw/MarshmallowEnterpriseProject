@@ -20,11 +20,11 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     // com/google/firebase/quickstart/database/NewPostActivity.java#L41-L41
 
 
-    public class Post
+    public static class Post
     {
         public String postTitle;
         public String postDescription;
-        public String PostOwner; //foreign key (kinda)
+        public String postOwner; //foreign key (kinda)
 
 
         //Default Constructor
@@ -38,7 +38,7 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
         {
             title = postTitle;
             description = postDescription;
-            owner = PostOwner;
+            owner = postOwner;
         }
 
         public String getPostTitle()
@@ -63,12 +63,12 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
 
         public String getPostOwner()
         {
-            return PostOwner;
+            return postOwner;
         }
 
         public void setPostOwner(String owner)
         {
-            owner = PostOwner;
+            owner = postOwner;
         }
     }
 
@@ -82,11 +82,11 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     {
         //todo make this method work off the firebase user id to actually check...
         //what is being used and get the ID instead of being hard coded
-        //return "TestUser1";
+        return "TestUser1";
 
 
-        FirebaseUser user =  mAuth.getCurrentUser();
-        String userId = user.getUid();
+//        FirebaseUser user =  mAuth.getCurrentUser();
+//        String userId = user.getUid();
     }
 
 
@@ -109,16 +109,24 @@ public class CreatePostActivity extends AppCompatActivity implements View.OnClic
     {
 
         FirebaseDatabase database =  FirebaseDatabase.getInstance();
-        Post post = new Post("TestPost1","TestDescription1",getLoginID());
+        Post newPost = new Post("TestPost1","TestDescription1","TestUser1");
 
         //todo - add validation to prevent duplication of users in database - potentially not the way i'll be doing it
 
-        DatabaseReference mRef =  database.getReference().child("Posts")/*.child(getLoginID)*/;
-        mRef.setValue(post);
+//        DatabaseReference mRef =  database.getReference().child("Posts");
+//        mRef = mRef.push();
+//        mRef.setValue("test");
+
+        DatabaseReference mRef =  database.getReference().child("testUser1").child("post title");
+        mRef.setValue("test post title");
+
+        mRef =  database.getReference().child("testUser1").child("post description");
+        mRef.setValue("test description");
+
     }
 }
 
-
+//.child("TestUser1")
 
 //button click listener
 // https://stackoverflow.com/questions/20156733/how-to-add-button-click-event-in-android-studio
