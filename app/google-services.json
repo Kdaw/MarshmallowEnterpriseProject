@@ -15,6 +15,34 @@
       },
       "oauth_client": [
         {
+          "client_id": "1082432950458-9o412goclaf88ollhecg60kf0lfb3vr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.karld.marshmallowenp",
+            "certificate_hash": "c97a4939d2c00d55f34f0e00cc95e85370416b02"
+          }
+        },
+        {
+          "client_id": "1082432950458-pk8apqh0mkcpv2ibvgrjlpc0sg03l2jp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.karld.marshmallowenp",
+            "certificate_hash": "4c94116183e0d3ea0b1c905e6bb2ce26102f2947"
+          }
+        },
+        {
+          "client_id": "1082432950458-3pvunp4rri7rqsivjmv49mipkva5eim5.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1082432950458-b120u65073m1viu8qc51e7crjfjqp4i3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.karld.marshmallowenp",
+            "certificate_hash": "00951b27a57deb8b77ab6d7a83e9069697f31eb3"
+          }
+        },
+        {
           "client_id": "1082432950458-628c5ck9hnb59e4otn7dtd89vt75bd9g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -40,7 +68,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1082432950458-o1c6pmkn2nevnnegbp0l9ijeu96hbg11.apps.googleusercontent.com",
+              "client_id": "1082432950458-3pvunp4rri7rqsivjmv49mipkva5eim5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
