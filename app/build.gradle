@@ -31,8 +31,18 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.8.0'
     //firebase database dependency
     compile 'com.google.firebase:firebase-database:11.8.0'
-    //User auth dependency
+
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
+
+
+    //todo - ask about licensing with tyrone
+    //https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
+    //http://jakewharton.github.io/butterknife/
+    //http://www.apache.org/licenses/LICENSE-2.0
+    //compile 'com.jakewharton:butterknife:x.y.z'
+
 }
 apply plugin: 'com.google.gms.google-services'

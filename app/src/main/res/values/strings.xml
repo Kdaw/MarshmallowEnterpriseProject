@@ -1,5 +1,7 @@
 <resources>
+
     <string name="app_name"> uk.ac.tees.com2060.Marshmallow</string>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -15,5 +17,15 @@
         completions."
     </string>
     <string name="button_logout">Logout</string>
+
     <string name="title_activity_maps">Map</string>
+
+
+    <string name="title_activity_create_post">CreatePost</string>
+    <string name="CreatePostButton">Create Post</string>
+    <string name="PostTitleText">Enter Post Title</string>
+    <string name="PostDescriptionText">Enter Post Description</string>
+    <string name="title_activity_view_post">ViewPostActivity</string>
+
+
 </resources>
