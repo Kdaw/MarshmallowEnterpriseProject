@@ -15,4 +15,5 @@
         completions."
     </string>
     <string name="button_logout">Logout</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
