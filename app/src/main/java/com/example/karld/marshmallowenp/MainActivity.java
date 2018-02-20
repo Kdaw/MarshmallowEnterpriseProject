@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     //links button on homepage to the create post activity
     public void goToAnActivity(View view) {
-        Intent Intent = new Intent(this, CreatePostActivity.class);
-        startActivity(Intent);
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        startActivity(intent);
     }
 
 
