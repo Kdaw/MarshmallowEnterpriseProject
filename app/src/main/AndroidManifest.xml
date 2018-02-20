@@ -23,10 +23,14 @@
 
             android:name=".MainActivity"
             android:label="Home Screen">
+        </activity>
 
+        <activity
             android:name=".CreatePostActivity"
             android:label="@string/title_activity_create_post"
-            android:theme="@style/AppTheme.NoActionBar" /></activity>
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
 
     </application>
 
