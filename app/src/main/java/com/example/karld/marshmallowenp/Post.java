@@ -9,15 +9,14 @@ public class Post {
     private static String userID;
     private static String postTitle;
     private static String details;
-    private static String location; //TODO update with location details for Google Maps
+    private static String location;     //TODO update with location details for Google Maps     //TODO potentially add start location and end location
     //TODO add image type variable
     private static int reviewed; // either 1 or 0 to add to firebase. Use YES or NO
-    private static final int YES = 1;
-    private static final int NO = 0;
-    private static int available;
-    //TODO add list of bidders
-        private static String bidders;
-    private static String bidWonBy;
+        private static final int YES = 1;
+        private static final int NO = 0;
+    private static int available;   //is job still available
+    private static String bidders;  //users who bid on post
+    private static String bidWonBy; //user who won the bid
 
     private Post(String uID, String title, String deets, String loc){
         //push for post id then add rest as child
