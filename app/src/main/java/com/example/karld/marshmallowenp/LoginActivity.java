@@ -21,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A login screen that offers login via Google account.
@@ -33,6 +35,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         mAuth = FirebaseAuth.getInstance();
         //add onClickListener to Google sign in button
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
     }
@@ -64,6 +70,10 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        //TODO remove test code
+        mDatabase.child("Users").setValue(currentUser.getUid());
+        mDatabase.child("Users").child(currentUser.getUid()).child("Rate").setValue(0);
+        mDatabase.child("Users").child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
         updateUI(currentUser);
     }
 
