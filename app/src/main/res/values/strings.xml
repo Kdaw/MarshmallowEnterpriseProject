@@ -18,6 +18,9 @@
     </string>
     <string name="button_logout">Logout</string>
 
+    <string name="title_activity_maps">Map</string>
+
+
     <string name="title_activity_create_post">CreatePost</string>
     <string name="CreatePostButton">Create Post</string>
     <string name="PostTitleText">Enter Post Title</string>
@@ -25,5 +28,6 @@
     <string name="title_activity_view_post">ViewPostActivity</string>
     <string name="Review_Text">Review text here...</string>
     <string name="Submit_Text" >Submit</string>
+
 
 </resources>
