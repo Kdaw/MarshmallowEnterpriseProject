@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     }
 
     public void goToProfile(View view) {
-
+        Intent intent = new Intent(this, ProfileSettingsActivity.class);
+        startActivity(intent);
     }
 
 
