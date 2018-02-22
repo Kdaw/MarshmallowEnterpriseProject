@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/marshmallowfixerkarls.iml" filepath="$PROJECT_DIR$/marshmallowfixerkarls.iml" />
+      <module fileurl="file:///home/scm-studs/s6089158/AndroidStudioProjects/marshmallow/app/app.iml" filepath="/home/scm-studs/s6089158/AndroidStudioProjects/marshmallow/app/app.iml" />
+      <module fileurl="file:///home/scm-studs/s6089158/AndroidStudioProjects/marshmallow/marshmallow.iml" filepath="/home/scm-studs/s6089158/AndroidStudioProjects/marshmallow/marshmallow.iml" />
     </modules>
   </component>
 </project>

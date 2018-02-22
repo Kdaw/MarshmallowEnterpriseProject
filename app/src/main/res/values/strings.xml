@@ -23,5 +23,6 @@
     <string name="PostTitleText">Enter Post Title</string>
     <string name="PostDescriptionText">Enter Post Description</string>
     <string name="title_activity_view_post">ViewPostActivity</string>
+    <string name="profile_welcome">My Profile</string>
 
 </resources>
