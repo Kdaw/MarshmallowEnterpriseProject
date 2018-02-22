@@ -22,8 +22,18 @@
         <activity
             android:name=".CreatePostActivity"
             android:label="@string/title_activity_create_post"
+
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ProfileSettingsActivity"></activity>
+        <activity android:name=".ProfileSettingsActivity">
+
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
+
+
+
     </application>
+
 
 </manifest>
