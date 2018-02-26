@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.karld.marshmallowenp">
+    <!--PERMISSIONS-->
+    <!--Location services-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -18,12 +21,34 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="Home Screen"></activity>
+            android:label="Home Screen">
+
+        </activity>
         <activity
             android:name=".CreatePostActivity"
             android:label="@string/title_activity_create_post"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ProfileSettingsActivity"></activity>
+
+
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".ProfileSettingsActivity">
+
+           <!-- android:theme="@style/AppTheme.NoActionBar"-->
+
+        </activity>
+
+
+
+
+
+            <!--android:theme="@style/AppTheme.NoActionBar">-->
+
+        <activity android:name=".CreateReviewActivity">
+
+        </activity>
+
     </application>
+
 
 </manifest>

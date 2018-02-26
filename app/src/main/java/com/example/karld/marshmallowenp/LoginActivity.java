@@ -69,12 +69,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+
         //TODO remove test code
-        mDatabase.child("Users").setValue(currentUser.getUid());
-        mDatabase.child("Users").child(currentUser.getUid()).child("Rate").setValue(0);
-        mDatabase.child("Users").child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
-        updateUI(currentUser);
+
+        //updateUI(currentUser);
+
     }
 
     //called from onStart to change the displayed page based on whether or not account is null
@@ -92,7 +91,9 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
 
     private void loadHome() {
         Intent intent = new Intent(this, MainActivity.class);
+
         startActivity(intent);
+
     }
 
     @Override
@@ -109,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
     @Override
