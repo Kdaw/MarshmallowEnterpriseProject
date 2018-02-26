@@ -53,7 +53,8 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         ChildEventListener cListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+                adapter.add((String) dataSnapshot.getValue());
+                listKeys.add(dataSnapshot.getKey());
             }
 
             @Override
@@ -63,7 +64,16 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                //code from www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
+                //deals with removal from database to update snapshot
+                String key = dataSnapshot.getKey();
+                int index = listKeys.indexOf(key);
 
+                if (index != -1) {
+                    listItems.remove(index);
+                    listKeys.remove(index);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -75,6 +85,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        }
+        };
+        dbRef.addChildEventListener(cListener);
     }
 }
