@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText.Title" />
 
     <EditText
-        android:id="@+id/editText.Location"
+        android:id="@+id/editText.Pickup"
         android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText.Details" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText.Dropoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -75,10 +75,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText.Location" />
+        app:layout_constraintTop_toBottomOf="@+id/editText.Pickup" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText.Distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -89,6 +89,6 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText.Dropoff" />
 
 </android.support.constraint.ConstraintLayout>
