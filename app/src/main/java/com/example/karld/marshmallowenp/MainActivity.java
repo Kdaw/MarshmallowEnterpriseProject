@@ -47,4 +47,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     }
 
 
+    public void goToJobsList(View view) {
+        Intent intent = new Intent(this, ViewAvailableJobsActivity.class);
+        startActivity(intent);
+    }
+
 }

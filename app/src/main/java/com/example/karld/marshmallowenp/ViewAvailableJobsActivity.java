@@ -30,6 +30,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = fbDatabase.getReference("Posts");
     private int itemSelected;
+    private String[] jobID;
 
 
     @Override
@@ -47,13 +48,25 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
             }
         });
         addChildEventListener();
+        //todo setup navigation to the job details page to accept one
+        //availableJobs.setOnItemClickListener(new);
     }
 
     private void addChildEventListener() {
         ChildEventListener cListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                adapter.add((String) dataSnapshot.getValue());
+                itemSelected = 0;
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    jobID[itemSelected] = dataSnapshot.getValue(String.class);
+
+                    String name = ds.getKey();
+                    listKeys.add(name);
+                    if(name.equals("title"))
+                        adapter.add(dataSnapshot.child(name).getValue(String.class));
+                    itemSelected++;
+                }
+
                 listKeys.add(dataSnapshot.getKey());
             }
 
