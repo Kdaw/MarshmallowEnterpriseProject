@@ -23,13 +23,16 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
     String title;
     String details;
-    String location;
+    String dropoff;
+    String pickup;
+    String distance;
 
 
     EditText titleInput;
     EditText detailInput;
-    EditText locationInput;
-
+    EditText PickupLocationInput;
+    EditText DropoffLocationInput;
+    EditText DistanceInput;
     Button postButton;
 
 
@@ -54,7 +57,9 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
         titleInput = (EditText) findViewById(R.id.editText_Title);
         detailInput = (EditText) findViewById(R.id.editText_Details);
-        locationInput = (EditText) findViewById(R.id.editText_Location);
+        PickupLocationInput = (EditText) findViewById(R.id.editText_Pickup);
+        DropoffLocationInput = (EditText) findViewById(R.id.editText_Dropoff);
+        DistanceInput = (EditText) findViewById(R.id.editText_Distance);
 
         postButton = (Button) findViewById(R.id.button_create_post);
         postButton.setOnClickListener(new View.OnClickListener() {
@@ -65,11 +70,16 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 mRef =  FirebaseDatabase.getInstance().getReference().child("Posts").push();
                 title = titleInput.getText().toString();
                 details = detailInput.getText().toString();
-                location = locationInput.getText().toString();
+                pickup = PickupLocationInput.getText().toString();
+                dropoff = DropoffLocationInput.getText().toString();
+                distance = DistanceInput.getText().toString();
+
 
                 mRef.child("title").setValue(title);
                 mRef.child("details").setValue(details);
-                mRef.child("location").setValue(location);
+                mRef.child("pickup").setValue(pickup);
+                mRef.child("dropoff").setValue(dropoff);
+                mRef.child("distance").setValue(distance);
                 mRef.child("User").setValue(getUserID());
             }
         });
