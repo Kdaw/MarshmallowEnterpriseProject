@@ -2,6 +2,7 @@ package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
 import android.drm.DrmStore;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,20 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // --------------------------------------------------------------------------------------------------------------
+
+        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
+        NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case (R.id.nav_account):
+                        Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                        startActivity(in);
+                }
+                return true;
+            }
+        });
 
         // Fire BaseCode -----------------------------------------------------------------------------------------------
         mAuth = FirebaseAuth.getInstance();
@@ -41,7 +55,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         //mDatabase.setValue(currentUser.getUid());
         mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
         mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
-
     }
 
 
@@ -68,10 +81,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startActivity(intent);
     }
 
-    public void goToProfile(View view) {
-        Intent intent = new Intent(this, ProfileSettingsActivity.class);
-        startActivity(intent);
-    }
+    // Legacy Code--------------
+//    public void goToProfile(View view) {
+//        Intent intent = new Intent(this, ProfileSettingsActivity.class);
+//        startActivity(intent);
+//    }
 
 
     public void goToJobsList(View view) {

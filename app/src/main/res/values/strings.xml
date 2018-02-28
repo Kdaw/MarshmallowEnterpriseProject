@@ -36,5 +36,6 @@
     <string name="text_view_job_details_title">Job Details</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="create_post">Create post</string>
 
 </resources>
