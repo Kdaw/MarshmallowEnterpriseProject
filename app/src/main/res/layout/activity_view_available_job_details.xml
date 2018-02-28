@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailTitle" />
 
     <TextView
-        android:id="@+id/textView.Pickup"
+        android:id="@+id/textView.JobDetailsPickup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDescription" />
 
     <TextView
-        android:id="@+id/textView.JobDetailsPickup"
+        android:id="@+id/textView.JobDetailsDropoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -61,5 +61,16 @@
         android:text="Dropoff"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView.Pickup" />
+        app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsPickup" />
+
+    <TextView
+        android:id="@+id/textView.JobDetailsDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Distance"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDropoff" />
 </android.support.constraint.ConstraintLayout>
