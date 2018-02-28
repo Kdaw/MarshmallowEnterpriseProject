@@ -1,11 +1,13 @@
 package com.example.karld.marshmallowenp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,13 +32,16 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = fbDatabase.getReference("Posts");
     private int itemSelected;
-    private String[] jobID;
+    private String[] jobID = new String[1000];
+    public static final String MESSAGE = "message";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_available_jobs);
+
+        Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
         availableJobs = (ListView) findViewById(R.id.ListView_AvailableJobs);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
@@ -45,11 +50,24 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 itemSelected = position;
+
             }
         });
+
+
         addChildEventListener();
-        //todo setup navigation to the job details page to accept one
-        //availableJobs.setOnItemClickListener(new);
+
+        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+            Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+            System.out.println("ID just before adding to intent " + jobID[position]);
+            String ident = jobID[position];
+            intent.putExtra("id", ident);
+            startActivity(intent);
+            }
+        });
     }
 
     private void addChildEventListener() {
@@ -58,8 +76,9 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 itemSelected = 0;
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    jobID[itemSelected] = dataSnapshot.getValue(String.class);
-
+                    String key = dataSnapshot.getKey();
+                    jobID[itemSelected] = key;
+                    System.out.println(jobID[itemSelected]);
                     String name = ds.getKey();
                     listKeys.add(name);
                     if(name.equals("title"))
