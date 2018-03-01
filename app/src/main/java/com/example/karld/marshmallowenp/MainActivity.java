@@ -1,8 +1,13 @@
 package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
+import android.drm.DrmStore;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,13 +19,37 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle   mToggle;
     @Override
     //added activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
 
+        // Slider Menu Code ----------------------------------------------------------------------------------------------
+        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
+        NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case (R.id.nav_account):
+                        Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                        startActivity(in);
+                }
+                return true;
+            }
+        });
+
+        // Fire BaseCode -----------------------------------------------------------------------------------------------
+        mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
         //mDatabase.setValue(currentUser.getUid());
@@ -28,6 +57,17 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
     }
 
+
+    // Enables Nav menu click -  Allows for both slide and on click access.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(mToggle.onOptionsItemSelected(item))
+    {
+        return  true;
+    }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onClick(View v){
@@ -41,10 +81,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startActivity(intent);
     }
 
-    public void goToProfile(View view) {
-        Intent intent = new Intent(this, ProfileSettingsActivity.class);
-        startActivity(intent);
-    }
+    // Legacy Code--------------
+//    public void goToProfile(View view) {
+//        Intent intent = new Intent(this, ProfileSettingsActivity.class);
+//        startActivity(intent);
+//    }
 
 
     public void goToJobsList(View view) {
