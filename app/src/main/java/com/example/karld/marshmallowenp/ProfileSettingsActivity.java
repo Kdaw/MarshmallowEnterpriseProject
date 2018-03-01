@@ -38,13 +38,15 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case (R.id.nav_home):
-                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(in);
-                        case (R.id.nav_account):
-                        Intent in2 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(in2);
+                // Handle navigation view item clicks.
+                int id = menuItem.getItemId();
+
+                if (id == R.id.nav_home) {
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_account) {
+                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                    startActivity(in);
                 }
                 return true;
             }

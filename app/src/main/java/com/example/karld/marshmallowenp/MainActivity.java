@@ -39,10 +39,15 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case (R.id.nav_account):
-                        Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
-                        startActivity(in);
+                // Handle navigation view item clicks here.
+                int id = menuItem.getItemId();
+
+                if (id == R.id.nav_home) {
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_account) {
+                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                    startActivity(in);
                 }
                 return true;
             }
