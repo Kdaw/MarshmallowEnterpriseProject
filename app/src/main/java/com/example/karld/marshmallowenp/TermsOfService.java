@@ -10,18 +10,14 @@ import android.view.MenuItem;
 
 import com.github.barteksc.pdfviewer.PDFView;
 
-public class TermsOfService extends MainActivity {
+public class TermsOfService extends AppCompatActivity {
     private PDFView pdfView;
-//    private DrawerLayout mDrawerLayout;
-//    private ActionBarDrawerToggle   mToggle;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle   mToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms_of_service);
-
-        // Find required File to output onto display.
-        pdfView = (PDFView)findViewById(R.id.pdfView);
-        pdfView.fromAsset("TOS.pdf").load();
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -51,11 +47,10 @@ public class TermsOfService extends MainActivity {
                 return true;
             }
         });
-        
-//        // Find required File to output onto display.
-//        pdfView = (PDFView)findViewById(R.id.pdfView);
-//        pdfView.fromAsset("TOS.pdf").load();
 
+        // Find required File to output onto display.
+        pdfView = (PDFView)findViewById(R.id.pdfView);
+        pdfView.fromAsset("TOS.pdf").load();
     }
 
     // Enables Nav menu click -  Allows for both slide and on click access.

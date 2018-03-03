@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle   mToggle;
-
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle   mToggle;
     @Override
+    //added activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

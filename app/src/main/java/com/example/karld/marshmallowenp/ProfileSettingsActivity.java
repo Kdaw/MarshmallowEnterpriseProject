@@ -18,7 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileSettingsActivity extends MainActivity {
+public class ProfileSettingsActivity extends AppCompatActivity {
+
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle   mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
