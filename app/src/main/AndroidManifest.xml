@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.karld.marshmallowenp">
 
+    Allows for reading Files--------------------------------------------------
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <!-- PERMISSIONS -->
     <!-- Location services -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -37,7 +40,8 @@
 
         <activity android:name=".CreateReviewActivity" />
         <activity android:name=".ViewAvailableJobsActivity" />
-        <activity android:name=".ViewAvailableJobDetailsActivity"></activity>
+        <activity android:name=".ViewAvailableJobDetailsActivity" />
+        <activity android:name=".TermsOfService"></activity>
     </application>
 
 </manifest>

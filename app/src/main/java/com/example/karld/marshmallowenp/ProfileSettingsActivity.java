@@ -18,16 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileSettingsActivity extends AppCompatActivity {
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle   mToggle;
+public class ProfileSettingsActivity extends MainActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
-        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout2);
+        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
@@ -46,6 +45,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                     startActivity(in);
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_TOS) {
+                    Intent in = new Intent(getApplicationContext(), TermsOfService.class);
                     startActivity(in);
                 }
                 return true;

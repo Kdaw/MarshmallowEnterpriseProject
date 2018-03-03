@@ -1,31 +1,27 @@
 package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.github.barteksc.pdfviewer.PDFView;
 
-public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
-
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle   mToggle;
-
+public class TermsOfService extends MainActivity {
+    private PDFView pdfView;
+//    private DrawerLayout mDrawerLayout;
+//    private ActionBarDrawerToggle   mToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_terms_of_service);
+
+        // Find required File to output onto display.
+        pdfView = (PDFView)findViewById(R.id.pdfView);
+        pdfView.fromAsset("TOS.pdf").load();
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -39,7 +35,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks here.
+                // Handle navigation view item clicks.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
@@ -55,50 +51,21 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 return true;
             }
         });
+        
+//        // Find required File to output onto display.
+//        pdfView = (PDFView)findViewById(R.id.pdfView);
+//        pdfView.fromAsset("TOS.pdf").load();
 
-        // Fire BaseCode -----------------------------------------------------------------------------------------------
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
-        //mDatabase.setValue(currentUser.getUid());
-        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
-        mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
     }
-
 
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         if(mToggle.onOptionsItemSelected(item))
-    {
-        return  true;
-    }
+        {
+            return  true;
+        }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onClick(View v){
-
-        FirebaseAuth.getInstance().signOut();
-    }
-
-    //links button on homepage to the create post activity
-    public void goToAnActivity(View view) {
-        Intent intent = new Intent(this, CreatePostActivity.class);
-        startActivity(intent);
-    }
-
-    // Legacy Code--------------
-//    public void goToProfile(View view) {
-//        Intent intent = new Intent(this, ProfileSettingsActivity.class);
-//        startActivity(intent);
-//    }
-
-
-    public void goToJobsList(View view) {
-        Intent intent = new Intent(this, ViewAvailableJobsActivity.class);
-        startActivity(intent);
-    }
-
 }
