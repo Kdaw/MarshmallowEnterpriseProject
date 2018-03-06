@@ -38,9 +38,10 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
     private ListView availableJobs;
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = fbDatabase.getReference("Posts");
-    private int itemSelected;
+    private int itemSelected = 0;
     private String[] jobID = new String[1000];
     public static final String MESSAGE = "message";
+
 
 
     @Override
@@ -84,12 +85,13 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
         availableJobs.setAdapter(adapter);
         availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemSelected = position;
-
-            }
-        });
+//        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                itemSelected = position;
+//
+//
+//            }
+//        });
 
 
         addChildEventListener();
@@ -111,16 +113,17 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         ChildEventListener cListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                itemSelected = 0;
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = dataSnapshot.getKey();
                     jobID[itemSelected] = key;
                     System.out.println(jobID[itemSelected]);
                     String name = ds.getKey();
                     listKeys.add(name);
-                    if(name.equals("title"))
+                    if(name.equals("title")) {
                         adapter.add(dataSnapshot.child(name).getValue(String.class));
-                    itemSelected++;
+                        itemSelected++;
+                    }
                 }
 
                 listKeys.add(dataSnapshot.getKey());
