@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     private DatabaseReference mDatabase;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle   mToggle;
+    private GoogleSignInClient  mGoogleSignInClient;
     @Override
     //added activity
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,13 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 } else if (id == R.id.nav_TOS) {
                     Intent in = new Intent(getApplicationContext(), TermsOfService.class);
                     startActivity(in);
+                } else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+
                 }
                 return true;
             }
@@ -89,11 +100,17 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startActivity(intent);
     }
 
-    // Legacy Code--------------
-//    public void goToProfile(View view) {
-//        Intent intent = new Intent(this, ProfileSettingsActivity.class);
-//        startActivity(intent);
-//    }
+
+
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete( Task<Void> task) {
+                        // ...
+                    }
+                });
+    }
 
 
     public void goToJobsList(View view) {
