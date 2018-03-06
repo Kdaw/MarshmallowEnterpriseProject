@@ -19,15 +19,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
+
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle   mToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
-        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout2);
+        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
@@ -38,13 +40,18 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case (R.id.nav_home):
-                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(in);
-                        case (R.id.nav_account):
-                        Intent in2 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(in2);
+                // Handle navigation view item clicks.
+                int id = menuItem.getItemId();
+
+                if (id == R.id.nav_home) {
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_account) {
+                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_TOS) {
+                    Intent in = new Intent(getApplicationContext(), TermsOfService.class);
+                    startActivity(in);
                 }
                 return true;
             }

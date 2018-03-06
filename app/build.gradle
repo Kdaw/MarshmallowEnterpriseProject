@@ -40,6 +40,9 @@ dependencies {
     // Nav Menu
     implementation 'com.android.support:design:26.1.0'
 
+    //PDF Library
+    compile 'com.github.barteksc:android-pdf-viewer:2.3.0'
+
     //todo - ask about licensing with tyrone
     //https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
     //http://jakewharton.github.io/butterknife/

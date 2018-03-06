@@ -5,14 +5,14 @@
         android:icon="@mipmap/ic_home_black_24dp"
         android:title="Home" />
     <item
-        android:id="@+id/blank"
+        android:id="@+id/nav_blank"
         android:title="blank" />
     <item
         android:id="@+id/nav_blank2"
         android:title="blank" />
     <item
-        android:id="@+id/nav_blank3"
-        android:title="blank" />
+        android:id="@+id/nav_TOS"
+        android:title="Terms Of Service(PH)" />
 
     <item android:title="Settings">
         <menu>
