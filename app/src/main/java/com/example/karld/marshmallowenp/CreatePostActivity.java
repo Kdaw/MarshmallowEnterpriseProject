@@ -1,5 +1,6 @@
 package com.example.karld.marshmallowenp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,11 +16,10 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     //todo add comments and manage readability
     //todo Finish CreatePostActivity
     //create post page that is linked from home screen to allow user to create post
-    //below is help and roughly what to do
+
 
 
     private DatabaseReference mRef;
-
 
     String title;
     String details;
@@ -27,12 +27,15 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     String pickup;
     String distance;
 
+    //Exists to remove this text from the beginning of the push link so when saving the postID from the push all we have is the ID itself
+    String removeLink = "https://enpmarshmallow.firebaseio.com/Posts/";
 
     EditText titleInput;
     EditText detailInput;
     EditText PickupLocationInput;
     EditText DropoffLocationInput;
     EditText DistanceInput;
+
     Button postButton;
 
 
@@ -68,6 +71,12 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
             public void onClick(View v)
             {
                 mRef =  FirebaseDatabase.getInstance().getReference().child("Posts").push();
+                //region Save push()value for postID
+                String fullPostID = mRef.toString();                                //this saves the push link with the firebase link before it, which needs removing
+                String postID = fullPostID.replace(removeLink, "");     //this removes the firebase link and leaves postID as just the value required
+//                    Toast.makeText(CreatePostActivity.this, postID,
+//                            Toast.LENGTH_LONG).show();
+                //endregion
                 title = titleInput.getText().toString();
                 details = detailInput.getText().toString();
                 pickup = PickupLocationInput.getText().toString();
@@ -81,6 +90,12 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 mRef.child("dropoff").setValue(dropoff);
                 mRef.child("distance").setValue(distance);
                 mRef.child("User").setValue(getUserID());
+
+                //region Intent to send pushID
+                Intent intent = new Intent(getBaseContext(), ViewPostActivity.class);
+                intent.putExtra("POST_ID", postID);
+                startActivity(intent);
+                //endregion
             }
         });
     }
