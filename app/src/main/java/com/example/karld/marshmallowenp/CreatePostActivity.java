@@ -19,6 +19,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
 
 
+    //region Instance Variables
     private DatabaseReference mRef;
 
     String title;
@@ -37,6 +38,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     EditText DistanceInput;
 
     Button postButton;
+    //endregion
 
 
     /**
@@ -71,12 +73,19 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
             public void onClick(View v)
             {
                 mRef =  FirebaseDatabase.getInstance().getReference().child("Posts").push();
+
+
                 //region Save push()value for postID
-                String fullPostID = mRef.toString();                                //this saves the push link with the firebase link before it, which needs removing
-                String postID = fullPostID.replace(removeLink, "");     //this removes the firebase link and leaves postID as just the value required
-//                    Toast.makeText(CreatePostActivity.this, postID,
-//                            Toast.LENGTH_LONG).show();
+                String fullPostID = mRef.toString();
+                    //this saves the push link with the firebase link before it, which needs removing
+                String postID = fullPostID.replace(removeLink, "");
+                    //this removes the firebase link and leaves postID as just the value required
+
+
+//              Toast.makeText(CreatePostActivity.this, postID,
+//              Toast.LENGTH_LONG).show();
                 //endregion
+
                 title = titleInput.getText().toString();
                 details = detailInput.getText().toString();
                 pickup = PickupLocationInput.getText().toString();
