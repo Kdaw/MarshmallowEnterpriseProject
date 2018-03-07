@@ -37,5 +37,6 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="create_post">Create post</string>
+    <string name="button_bid_on_job">Bid Now</string>
 
 </resources>

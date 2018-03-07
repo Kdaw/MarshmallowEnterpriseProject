@@ -7,8 +7,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +27,9 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle;
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = fbDatabase.getReference("Posts");
-
+    private String postedBy;
+    private DatabaseReference mRef;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +71,14 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         final TextView dropoff = findViewById(R.id.textView_JobDetailsDropoff);
         final TextView distance = findViewById(R.id.textView_JobDetailsDistance);
 
+        button = findViewById(R.id.button_JobDetailsBidNow);
+        button.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                bidOnJob();
+            }
+        });
 
         Intent intentExtra = getIntent();
 
@@ -81,6 +96,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
                 String sPickup ="Pickup From: " + ds.child("pickup").getValue(String.class);
                 String sDropoff ="Deliver to: " + ds.child("dropoff").getValue(String.class);
                 String sDistance ="Route Distance: " + ds.child("distance").getValue(String.class);
+                postedBy = ds.child("User").getValue(String.class);
                 System.out.println(sTitle);
                 title.setText(sTitle);
                 detail.setText(sDetails);
@@ -93,6 +109,30 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    public void bidOnJob() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        Intent intentExtra = getIntent();
+
+        String cUserID = currentUser.getUid();
+        String cPostID = intentExtra.getStringExtra("id");
+        EditText bidValue = findViewById(R.id.editText_JobDetailsBidValue);
+        int cBidValue = Integer.parseInt(bidValue.getText().toString());
+
+        mRef =  FirebaseDatabase.getInstance().getReference().child("Bids").push();
+        mRef.child("BidderID").setValue(cUserID);
+        mRef.child("PostID").setValue(cPostID);
+        mRef.child("BidValue").setValue(cBidValue);
+        mRef.child("PostOwner").setValue(postedBy);
+
+        Toast.makeText(this, "Your bid has been posted successfully", Toast.LENGTH_LONG).show();
+
+
+        Intent returnIntent = new Intent(this, ViewAvailableJobsActivity.class);
+        startActivity(returnIntent);
     }
 
     // Enables Nav menu click -  Allows for both slide and on click access.
