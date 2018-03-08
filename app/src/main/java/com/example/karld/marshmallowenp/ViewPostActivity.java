@@ -1,11 +1,9 @@
 package com.example.karld.marshmallowenp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 public class ViewPostActivity extends AppCompatActivity {
 
@@ -13,17 +11,38 @@ public class ViewPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_post);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
+        String pushID = getIntent().getStringExtra("POST_ID");       //should hopefully catch the postID
+            // Toast.makeText(ViewPostActivity.this, pushID,
+            // Toast.LENGTH_LONG).show();
 
+//todo code from profile settings to read from database, needs a lot of changing
+
+//          FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//          FirebaseUser currentUser = mAuth.getCurrentUser();
+//
+
+
+//          DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
+//
+//          final TextView vEmail = findViewById(R.id.textview_email);
+//          final String email = mDatabaseUsers.getKey();
+//          vEmail.setText(email);
+
+
+//          mDatabaseUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+//           @Override
+//           public void onDataChange(DataSnapshot dataSnapshot) {
+//           String value = dataSnapshot.getValue(String.class);
+//           vEmail.setText(value);
+//           }
+//           @Override
+//           public void onCancelled(DatabaseError databaseError) {
+//           }
+
+
+
+    };
 }
+
+

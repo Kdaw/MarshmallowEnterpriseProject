@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@mipmap/ic_home_black_24dp"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_blank"
+        android:title="blank" />
+    <item
+        android:id="@+id/nav_blank2"
+        android:title="blank" />
+    <item
+        android:id="@+id/nav_TOS"
+        android:title="Terms Of Service(PH)" />
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_account"
+                android:icon="@mipmap/ic_account_box_black_24dp"
+                android:title="Account" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@mipmap/ic_settings_black_24dp"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_Logout"
+                android:icon="@mipmap/ic_exit_to_app_black_24dp"
+                android:title="Logout" />
+        </menu>
+    </item>
+</menu>

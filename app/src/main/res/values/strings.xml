@@ -30,8 +30,13 @@
     <string name="profile_welcome">My Profile</string>
 
     <string name="Review_Text">Review text here</string>
-    <string name="Submit_Text" >Submit</string>
-
-
+    <string name="Submit_Text">Submit</string>
+    <string name="text_view_available_jobs">Available Jobs</string>
+    <string name="button_view_jobs">View Jobs</string>
+    <string name="text_view_job_details_title">Job Details</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="create_post">Create post</string>
+    <string name="button_bid_on_job">Bid Now</string>
 
 </resources>

@@ -9,7 +9,7 @@ public class Post {
     private static String userID;
     private static String postTitle;
     private static String details;
-    private static String location;     //TODO update with location details for Google Maps     //TODO potentially add start location and end location
+    private static String location;     //TODO update with pickup details for Google Maps     //TODO potentially add start pickup and end pickup
     //TODO add image type variable
     private static int reviewed; // either 1 or 0 to add to firebase. Use YES or NO
         private static final int YES = 1;
