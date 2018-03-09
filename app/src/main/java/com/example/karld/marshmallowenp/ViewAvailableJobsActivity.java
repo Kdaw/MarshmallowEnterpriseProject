@@ -1,6 +1,7 @@
 package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.graphics.Color;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -85,6 +87,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
         availableJobs.setAdapter(adapter);
         availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //availableJobs.setTextColor(Color.parseColor("#FFFFFF"));
 //        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                itemSelected = position;
