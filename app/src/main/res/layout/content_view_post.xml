@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.karld.marshmallowenp.ViewPostActivity"
+    android:background="@drawable/gradient"
     tools:showIn="@layout/activity_view_post">
 
     <android.support.constraint.Guideline

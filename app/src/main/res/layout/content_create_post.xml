@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.karld.marshmallowenp.CreatePostActivity"
+    android:background="@drawable/gradient"
     tools:showIn="@layout/activity_create_post">
 
     <Button
@@ -31,6 +32,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Post Title"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +47,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Post Details"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +62,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Pickup Location"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +77,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Dropoff Location"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +92,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Distance"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -42,13 +42,32 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //user details in nav bar BEGIN
+        //Textviews are found and changed as can be seen with debug but dont show up on the screen.
+        //If placeholders are removed then comment out all code below up to END comment
+        FirebaseAuth nAuth = FirebaseAuth.getInstance();
+        FirebaseUser navUser = nAuth.getCurrentUser();
+
+        setContentView(R.layout.navigation_header);
+        TextView navUserName = findViewById(R.id.textView_NavUser);
+        TextView navUserEmail = findViewById(R.id.textView_NavEmail);
+
+        String uEmail = navUser.getEmail();
+        String uName = navUser.getDisplayName();
+
+        setContentView(R.layout.activity_main);
+
+        navUserEmail.setText(uEmail);
+        navUserName.setText(uName);
+
+        //user details in nav bar END
 
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks.
+                // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
@@ -60,10 +79,19 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_TOS) {
                     Intent in = new Intent(getApplicationContext(), TermsOfService.class);
                     startActivity(in);
+                } else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+
                 }
                 return true;
             }
         });
+
+        setContentView(R.layout.activity_view_available_job_details);
 
         final TextView title = findViewById(R.id.textView_JobDetailTitle);
         final TextView detail = findViewById(R.id.textView_JobDetailsDescription);
