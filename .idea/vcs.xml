@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+<<<<<<< b7aee07503bb89031b63653bde36d98527d98bae
     <mapping directory="/home/scm-studs/s6105214/AndroidStudioProjects/jacobs-repo" vcs="Git" />
+=======
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+>>>>>>> Rebase commits
   </component>
 </project>
