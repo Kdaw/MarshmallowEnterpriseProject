@@ -2,7 +2,11 @@ package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +21,8 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     //todo Finish CreatePostActivity
     //create post page that is linked from home screen to allow user to create post
 
-
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     //region Instance Variables
     private DatabaseReference mRef;
@@ -59,6 +64,47 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
+
+        // Slider Menu Code ----------------------------------------------------------------------------------------------
+        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
+        NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                // Handle navigation view item clicks here.
+                int id = menuItem.getItemId();
+
+                if (id == R.id.nav_home) {
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_create_post) {
+                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_view_jobs) {
+                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_account) {
+                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                    startActivity(in);
+                }else if (id == R.id.nav_settings) {
+                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
+                    startActivity(in);
+                }else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
 
         titleInput = (EditText) findViewById(R.id.editText_Title);
         detailInput = (EditText) findViewById(R.id.editText_Details);
@@ -107,6 +153,17 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 //endregion
             }
         });
+    }
+
+    // Enables Nav menu click -  Allows for both slide and on click access.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(mToggle.onOptionsItemSelected(item))
+        {
+            return  true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
