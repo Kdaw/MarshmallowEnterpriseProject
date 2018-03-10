@@ -29,10 +29,11 @@
             android:label="Home Screen" />
         <activity
             android:name=".CreatePostActivity"
+
             android:label="@string/title_activity_create_post"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ProfileSettingsActivity"
+
+        <activity android:name=".ProfileSettingsActivity"
             android:label="Account" />
         <activity
             android:name=".ViewPostActivity"

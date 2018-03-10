@@ -70,7 +70,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
