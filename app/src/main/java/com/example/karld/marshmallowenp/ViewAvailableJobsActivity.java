@@ -64,7 +64,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks.
+                // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
@@ -92,7 +92,6 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                 return true;
             }
         });
-
 
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
