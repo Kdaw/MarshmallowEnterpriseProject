@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
         TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
-        txtProfileName.setText(uEmail);
+        txtProfileName.setText(uName);
+        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
+        txtProfileEmail.setText(uEmail);
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
