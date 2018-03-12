@@ -45,7 +45,7 @@ public class CreateReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_review);
         final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         int numOfStars = ratingBar.getNumStars();
-        ratingBar.setRating((float) 3.5);
+        ratingBar.setRating((float) 1);
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -87,8 +87,8 @@ public class CreateReviewActivity extends AppCompatActivity {
         });
 
 
-        //reviewInput = (EditText) findViewById(R.id.Review_Text);
-        //submitBtn = (Button) findViewById(R.id.Submit_Review);
+        reviewInput = (EditText) findViewById(R.id.Review_Text);
+        submitBtn = (Button) findViewById(R.id.Submit_Review);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +112,7 @@ public class CreateReviewActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), ViewPostActivity.class);
                 intent.putExtra("Review_ID", review_id);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }

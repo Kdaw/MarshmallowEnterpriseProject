@@ -42,6 +42,7 @@
             android:inputType="textMultiLine"
             android:padding="10dp"
             android:singleLine="false"
+            android:onClick="onClick"
             android:textColorHint="@android:color/darker_gray"
             android:textColorLink="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
