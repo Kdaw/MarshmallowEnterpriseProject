@@ -140,6 +140,8 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         mRef.child("PostID").setValue(cPostID);
         mRef.child("BidValue").setValue(cBidValue);
         mRef.child("PostOwner").setValue(postedBy);
+        mRef.child("Active").setValue(true);
+        mRef.child("Accepted").setValue(false);
 
         Toast.makeText(this, "Your bid has been posted successfully", Toast.LENGTH_LONG).show();
 

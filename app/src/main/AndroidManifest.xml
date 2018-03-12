@@ -38,6 +38,9 @@
         <activity android:name=".ProfileSettingsActivity"
             android:label="Account" />
 
+        <activity android:name=".ViewPostActivity"
+            android:label="View Post"/>
+
         <activity android:name=".CreateReviewActivity" />
 
         <activity android:name=".ViewAvailableJobsActivity"
