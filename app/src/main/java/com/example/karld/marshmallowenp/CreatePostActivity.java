@@ -147,9 +147,10 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 mRef.child("dropoff").setValue(dropoff);
                 mRef.child("distance").setValue(distance);
                 mRef.child("User").setValue(getUserID());
+                mRef.child("Active").setValue(true);
 
                 //region Intent to send pushID
-                Intent intent = new Intent(getBaseContext(), ViewPostActivity.class);
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.putExtra("POST_ID", postID);
                 startActivity(intent);
                 //endregion
