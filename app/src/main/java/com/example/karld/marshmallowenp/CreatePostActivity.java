@@ -81,9 +81,9 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 String postID = fullPostID.replace(removeLink, "");
                     //this removes the firebase link and leaves postID as just the value required
 
-
 //              Toast.makeText(CreatePostActivity.this, postID,
 //              Toast.LENGTH_LONG).show();
+
                 //endregion
 
                 title = titleInput.getText().toString();
