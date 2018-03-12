@@ -14,21 +14,22 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="258dp"
+            android:layout_height="72dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:contextClickable="true"
-            android:isIndicator="true"
+            android:isIndicator="false"
             android:numStars="5"
             android:padding="10dp"
-            android:rating="3.5"
+            android:rating="1"
             android:stepSize="0"
+            android:theme="@style/AppTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/colorPrimaryDark" />
+            tools:targetApi="m" />
 
     <EditText
         android:id="@+id/Review_Text"
@@ -46,19 +47,19 @@
         app:layout_constraintTop_toBottomOf="@+id/ratingBar"
         tools:background="@android:color/white" />
 
-    <Button
-        android:id="@+id/Submit_Review"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="304dp"
-        android:text="@string/Submit_Text"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Review_Text" />
+        <Button
+            android:id="@+id/Submit_Review"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="88dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="304dp"
+            android:text="@string/Submit_Text"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Review_Text" />
 
     </android.support.constraint.ConstraintLayout>
 
