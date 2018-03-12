@@ -38,5 +38,6 @@
     <string name="close">Close</string>
     <string name="create_post">Create post</string>
     <string name="button_bid_on_job">Bid Now</string>
+    <string name="review_Text_Overlay">Enter Review Here...</string>
 
 </resources>

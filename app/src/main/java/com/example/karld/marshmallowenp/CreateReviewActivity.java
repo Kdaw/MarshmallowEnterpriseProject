@@ -89,8 +89,9 @@ public class CreateReviewActivity extends AppCompatActivity {
 
                 review = reviewInput.getText().toString();
 
-                mRef.child("review").setValue(review);
+                mRef.child("Review").setValue(review);
                 mRef.child("User").setValue(getUserID());
+                mRef.child("Rating").setValue(ratingBar.getRating());
 
                 String totalStars = "Total Stars:: " + ratingBar.getNumStars();
                 String rating = "Rating:: " + ratingBar.getRating();
