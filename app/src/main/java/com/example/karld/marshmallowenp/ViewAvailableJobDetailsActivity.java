@@ -48,22 +48,35 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks.
+                // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(in);
+                } else if (id == R.id.nav_create_post) {
+                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_view_jobs) {
+                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
+                    startActivity(in);
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
                     startActivity(in);
-                } else if (id == R.id.nav_TOS) {
-                    Intent in = new Intent(getApplicationContext(), TermsOfService.class);
+                }else if (id == R.id.nav_settings) {
+                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(in);
+                }else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }
         });
+
 
         final TextView title = findViewById(R.id.textView_JobDetailTitle);
         final TextView detail = findViewById(R.id.textView_JobDetailsDescription);
@@ -127,6 +140,8 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         mRef.child("PostID").setValue(cPostID);
         mRef.child("BidValue").setValue(cBidValue);
         mRef.child("PostOwner").setValue(postedBy);
+        mRef.child("Active").setValue(true);
+        mRef.child("Accepted").setValue(false);
 
         Toast.makeText(this, "Your bid has been posted successfully", Toast.LENGTH_LONG).show();
 

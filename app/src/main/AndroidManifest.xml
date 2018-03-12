@@ -15,36 +15,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Splash"
-            android:label="@string/app_name">
+            android:label="MarshMallow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="Home Screen" />
+
         <activity
             android:name=".CreatePostActivity"
             android:label="@string/title_activity_create_post"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileSettingsActivity">
 
-            <!-- android:theme="@style/AppTheme.NoActionBar" -->
+        <activity android:name=".ProfileSettingsActivity"
+            android:label="Account" />
 
-        </activity>
-
-        <!-- android:theme="@style/AppTheme.NoActionBar"> -->
+        <activity android:name=".ViewPostActivity"
+            android:label="View Post"/>
 
         <activity android:name=".CreateReviewActivity" />
-        <activity android:name=".ViewAvailableJobsActivity" />
+
+        <activity android:name=".ViewAvailableJobsActivity"
+            android:label="Available Jobs"/>
+
         <activity android:name=".ViewAvailableJobDetailsActivity" />
-        <activity android:name=".TermsOfService" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".NavButtons"></activity>
+
+        <activity android:name=".TermsOfService"
+            android:label="Terms Of Service" />
+
+        <activity android:name=".LoginActivity"
+            android:label="MarshMallow" />
+
+        <activity android:name=".NavButtons" />
+
+        <activity android:name=".SettingsActivity"
+            android:label="Settings" />
     </application>
 
 </manifest>
