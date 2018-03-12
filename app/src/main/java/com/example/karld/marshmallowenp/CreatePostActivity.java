@@ -65,6 +65,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
+        //region Matts Code
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -105,6 +106,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 return true;
             }
         });
+        //endregion
 
         titleInput = (EditText) findViewById(R.id.editText_Title);
         detailInput = (EditText) findViewById(R.id.editText_Details);
