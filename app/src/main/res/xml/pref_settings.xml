@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    // This is for later on! this part is not complete yet along with the other commented out stuff, no time to have this done for friday.
+    <!--<PreferenceCategory android:title="General">-->
+        <!--<EditTextPreference-->
+    <!--</PreferenceCategory>-->
+
+    <PreferenceCategory android:title="@string/pref_title_notifications">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/notifications_new_message"
+            android:title="@string/title_new_notification_sound" />
+
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency="notifications_new_message"
+            android:key="@string/key_notifications_new_message_ringtone"
+            android:ringtoneType="notification"
+            android:summary="@string/summary_choose_ringtone"
+            android:title="@string/pref_title_ringtone" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_vibrate"
+            android:title="@string/title_vibrate"
+            android:summary="@string/summary_vibrate"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_about">
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/summary_about"/>
+
+        <Preference
+            android:selectable="false"
+            android:title="@string/title_version"
+            android:summary="@string/app_version"/>
+
+        <!--<Preference-->
+            <!--android:key="@string/key_send_feedback"-->
+            <!--android:title="@string/title_send_feedback"-->
+            <!--android:summary="@string/summary_support">-->
+        <!--<intent-->
+            <!--android:targetClass="com.example.karld.marshmallowenp.TermsOfService"-->
+            <!--android:targetPackage="com.example.karld.marshmallowenp"/>-->
+        <!--</Preference>-->
+
+        <!--<Preference-->
+            <!--android:title="@string/title_faq"-->
+            <!--android:summary="@string/summary_faq">-->
+            <!--<intent-->
+                <!--android:targetClass="com.example.karld.marshmallowenp.TermsOfService"-->
+                <!--android:targetPackage="com.example.karld.marshmallowenp"/>-->
+        <!--</Preference>-->
+
+        <!--<Preference-->
+            <!--android:title="@string/privacy_policy">-->
+            <!--<intent-->
+                <!--android:targetClass="com.example.karld.marshmallowenp.TermsOfService"-->
+                <!--android:targetPackage="com.example.karld.marshmallowenp"/>-->
+        <!--</Preference>-->
+
+        <Preference android:title="@string/title_terms">
+            <intent
+                android:targetClass="com.example.karld.marshmallowenp.TermsOfService"
+                android:targetPackage="com.example.karld.marshmallowenp"/>
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

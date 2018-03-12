@@ -46,12 +46,24 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 if (id == R.id.nav_home) {
                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(in);
+                } else if (id == R.id.nav_create_post) {
+                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_view_jobs) {
+                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
+                    startActivity(in);
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
                     startActivity(in);
-                } else if (id == R.id.nav_TOS) {
-                    Intent in = new Intent(getApplicationContext(), TermsOfService.class);
+                }else if (id == R.id.nav_settings) {
+                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(in);
+                }else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }

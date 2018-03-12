@@ -1,6 +1,7 @@
 package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.graphics.Color;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,23 +64,34 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks.
+                // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(in);
+                } else if (id == R.id.nav_create_post) {
+                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_view_jobs) {
+                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
+                    startActivity(in);
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
                     startActivity(in);
-                } else if (id == R.id.nav_TOS) {
-                    Intent in = new Intent(getApplicationContext(), TermsOfService.class);
+                }else if (id == R.id.nav_settings) {
+                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(in);
+                }else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }
         });
-
 
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
@@ -85,6 +99,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
         availableJobs.setAdapter(adapter);
         availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //availableJobs.setTextColor(Color.parseColor("#FFFFFF"));
 //        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                itemSelected = position;
