@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This will link up With the general section of settings body when i have it complete!-->
+<!--ATM this does nothing.-->
+<resources>
+    <string-array name="Nothing_yet_v1">
+        <item>0p</item>
+        <item>0p</item>
+        <item>0p</item>
+        <item>0</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="Nothing_yet_v2">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>
