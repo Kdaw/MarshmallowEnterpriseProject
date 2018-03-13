@@ -89,6 +89,10 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                 }
+//                else if (id == R.id.) {
+//                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+//                    startActivity(in);
+//                }
                 return true;
             }
         });
