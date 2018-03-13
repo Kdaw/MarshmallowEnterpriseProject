@@ -12,52 +12,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contextClickable="false"
-        android:isIndicator="true"
-        android:numStars="@integer/Review_Rating"
-        android:padding="10dp"
-        android:rating="3"
-        android:stepSize="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/colorPrimaryDark" />
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="258dp"
+            android:layout_height="72dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:contextClickable="true"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:padding="10dp"
+            android:rating="1"
+            android:stepSize="0"
+            android:theme="@style/AppTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="m" />
 
-    <EditText
-        android:id="@+id/Review_Text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/Review_Text"
-        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
-        android:inputType="textMultiLine"
-        android:padding="10dp"
-        android:singleLine="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-        tools:background="@android:color/white" />
+        <EditText
+            android:id="@+id/Review_Text"
+            android:layout_width="0dp"
+            android:layout_height="89dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/Review_Text"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:singleLine="false"
+            android:onClick="onClick"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColorLink="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+            tools:background="@android:color/white"
+            tools:text="@string/review_Text_Overlay" />
 
-    <Button
-        android:id="@+id/Submit_Review"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="304dp"
-        android:text="@string/Submit_Text"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Review_Text" />
+        <Button
+            android:id="@+id/Submit_Review"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="88dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="356dp"
+            android:text="@string/Submit_Text"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     </android.support.constraint.ConstraintLayout>
 
