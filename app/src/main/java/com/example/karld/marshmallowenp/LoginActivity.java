@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     }
 
     private void loadHome() {
-        Intent intent = new Intent(this, CreateReviewActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
 
         startActivity(intent);
 
