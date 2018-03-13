@@ -73,5 +73,6 @@
     <string name="textview_view_active_jobs_with_bids">My Open Jobs</string>
     <string name="textview_view_active_jobs_no_bids">Awaiting Bidders</string>
     <string name="text_nav_my_jobs">My Jobs</string>
+    <string name="text_view_jobs_with_bids">Jobs With Bids</string>
 
 </resources>
