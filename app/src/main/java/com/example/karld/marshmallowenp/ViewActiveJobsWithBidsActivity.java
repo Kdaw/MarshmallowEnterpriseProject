@@ -20,49 +20,50 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_active_jobs_with_bids);
 
-//        // Slider Menu Code ----------------------------------------------------------------------------------------------
-//        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
-//        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-//        mDrawerLayout.addDrawerListener(mToggle);
-//        mToggle.syncState();
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
-//        NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
-//        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem menuItem) {
-//                // Handle navigation view item clicks here.
-//                int id = menuItem.getItemId();
-//
-//                if (id == R.id.nav_home) {
-//                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
-//                    startActivity(in);
-//                } else if (id == R.id.nav_create_post) {
-//                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
-//                    startActivity(in);
-//                } else if (id == R.id.nav_view_jobs) {
-//                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
-//                    startActivity(in);
-//                } else if (id == R.id.nav_account) {
-//                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
-//                    startActivity(in);
-//                }else if (id == R.id.nav_settings) {
-//                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
-//                    startActivity(in);
-//                }else if (id == R.id.nav_Logout) {
-//                    //todo figure a signout method that signs out locally
-//                    //signOut();
-//                    FirebaseAuth.getInstance().signOut();
-//                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
-//                    startActivity(intent);
-//                }else if (id == R.id.nav_my_jobs) {
+        // Slider Menu Code ----------------------------------------------------------------------------------------------
+        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
+        NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                // Handle navigation view item clicks here.
+                int id = menuItem.getItemId();
+
+                if (id == R.id.nav_home) {
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_create_post) {
+                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_view_jobs) {
+                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
+                    startActivity(in);
+                } else if (id == R.id.nav_account) {
+                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+                    startActivity(in);
+                }else if (id == R.id.nav_settings) {
+                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
+                    startActivity(in);
+                }else if (id == R.id.nav_Logout) {
+                    //todo figure a signout method that signs out locally
+                    //signOut();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+//                else if (id == R.id.nav_my_jobs) {
 //                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
 //                    startActivity(in);
 //                }
-//                return true;
-//            }
-//        });
+                return true;
+            }
+        });
     }
 
     // Enables Nav menu click -  Allows for both slide and on click access.
