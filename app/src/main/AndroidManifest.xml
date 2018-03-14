@@ -34,18 +34,11 @@
         <activity
             android:name=".ProfileSettingsActivity"
             android:label="Account" />
-<<<<<<< HEAD
+
         <activity
             android:name=".ViewPostActivity"
             android:label="View Post" />
-=======
 
-
-        <activity android:name=".ViewPostActivity"
-            android:label="View Post"/>
-
-
->>>>>>> ea9cc7ad2bf04c0f9c8c781a273c817f3dedf8e5
         <activity android:name=".CreateReviewActivity" />
         <activity
             android:name=".ViewAvailableJobsActivity"
