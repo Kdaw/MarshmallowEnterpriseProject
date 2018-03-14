@@ -30,8 +30,7 @@
         <activity
             android:name=".CreatePostActivity"
 
-            android:label="@string/title_activity_create_post"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_create_post"/>
 
         <activity android:name=".ProfileSettingsActivity"
             android:label="Account" />

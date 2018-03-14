@@ -91,20 +91,19 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
                     startActivity(in);
-                }else if (id == R.id.nav_settings) {
+                } else if (id == R.id.nav_settings) {
                     Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(in);
-                }else if (id == R.id.nav_Logout) {
+                } else if (id == R.id.nav_Logout) {
                     //todo figure a signout method that signs out locally
                     //signOut();
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                } else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                    startActivity(in);
                 }
-//                else if (id == R.id.) {
-//                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
-//                    startActivity(in);
-//                }
                 return true;
             }
         });
