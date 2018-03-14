@@ -52,7 +52,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings" />
-        <activity android:name=".ViewActiveJobsWithBidsActivity"></activity>
+        <activity android:name=".ViewActiveJobsWithBidsActivity" />
+        <activity android:name=".ViewBidDetailsActivity"></activity>
     </application>
 
 </manifest>
