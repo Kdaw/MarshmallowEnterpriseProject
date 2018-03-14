@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -111,21 +112,30 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
             }
         });
 
-//        availableJobsNoBids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position,
-//                                    long id) {
-//                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
-//                System.out.println("ID just before adding to intent " + jobIDNoBids[position]);
-//                String ident = jobIDNoBids[position];
-//                intent.putExtra("id", ident);
-//                startActivity(intent);
-//            }
-//        });
+        availableJobsNoBids = (ListView) findViewById(R.id.ListView_ViewActiveNoBids);
+        adapterNoBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItemsNoBids);
+        availableJobsNoBids.setAdapter(adapterNoBids);
+        availableJobsNoBids.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        addChildEventListenerNoBids();
+
+        availableJobsNoBids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                System.out.println("ID just before adding to intent " + jobIDNoBids[position]);
+                String ident = jobIDNoBids[position];
+                intent.putExtra("id", ident);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addChildEventListenerBids() {
         ChildEventListener cListener = new ChildEventListener() {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             //gets all PostIDs that appear in the bids table and adds them to jobIDWithBids
@@ -135,9 +145,11 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
 
                     String name = ds.getKey();
                     listKeysWithBids.add(name);
-                    if(name.equals("PostID")) {
-                        adapterWithBids.add(dataSnapshot.child(name).getValue(String.class));
-                        itemSelectedWithBids++;
+                    if(dataSnapshot.child("PostOwner").getValue(String.class).equals(currentUser.getUid())) {
+                        if (name.equals("PostTitle")) {
+                            adapterWithBids.add(dataSnapshot.child(name).getValue(String.class) + "\t BID = £" + dataSnapshot.child("BidValue").getValue(Long.class));
+                            itemSelectedWithBids++;
+                        }
                     }
                 }
 
@@ -176,7 +188,62 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
         dbRefBids.addChildEventListener(cListener);
     }
 
+    private void addChildEventListenerNoBids() {
+        ChildEventListener cListener = new ChildEventListener() {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                //gets all PostIDs that appear in the bids table and adds them to jobIDWithBids
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    jobIDNoBids[itemSelectedNoBids] = key;
 
+                    String name = ds.getKey();
+                    listKeysNoBids.add(name);
+                    if(dataSnapshot.child("User").getValue(String.class).equals(currentUser.getUid())
+                            && dataSnapshot.child("HasBids").getValue(boolean.class) == false) {
+                        if (name.equals("title")) {
+                            adapterNoBids.add(dataSnapshot.child(name).getValue(String.class));
+                            itemSelectedNoBids++;
+                        }
+                    }
+                }
+
+                listKeysNoBids.add(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                //code from www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
+                //deals with removal from database to update snapshot
+                String key = dataSnapshot.getKey();
+                int index = listKeysNoBids.indexOf(key);
+
+                if (index != -1) {
+                    listItemsNoBids.remove(index);
+                    listKeysNoBids.remove(index);
+                    adapterNoBids.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        dbRefPosts.addChildEventListener(cListener);
+    }
 
 
 

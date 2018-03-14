@@ -29,7 +29,9 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
     private DatabaseReference dbRef = fbDatabase.getReference("Posts");
     private String postedBy;
     private DatabaseReference mRef;
+    private DatabaseReference bRef;
     private Button button;
+    private String pTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
                 System.out.println(postID);
                 DataSnapshot ds = dataSnapshot.child(postID);
                 String sTitle ="Title: " + ds.child("title").getValue(String.class);
+                pTitle = ds.child("title").getValue(String.class);
                 String sDetails ="Details: " + ds.child("details").getValue(String.class);
                 String sPickup ="Pickup From: " + ds.child("pickup").getValue(String.class);
                 String sDropoff ="Deliver to: " + ds.child("dropoff").getValue(String.class);
@@ -139,12 +142,16 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         int cBidValue = Integer.parseInt(bidValue.getText().toString());
 
         mRef =  FirebaseDatabase.getInstance().getReference().child("Bids").push();
+        bRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(cPostID);
         mRef.child("BidderID").setValue(cUserID);
         mRef.child("PostID").setValue(cPostID);
         mRef.child("BidValue").setValue(cBidValue);
         mRef.child("PostOwner").setValue(postedBy);
         mRef.child("Active").setValue(true);
         mRef.child("Accepted").setValue(false);
+        //TESTING post title for listView
+        mRef.child("PostTitle").setValue(pTitle);
+        bRef.child("HasBids").setValue(true);
 
         Toast.makeText(this, "Your bid has been posted successfully", Toast.LENGTH_LONG).show();
 
