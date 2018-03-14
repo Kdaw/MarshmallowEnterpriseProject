@@ -18,13 +18,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class CreateReviewActivity extends AppCompatActivity {
     //region Description
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle   mToggle;
     private DatabaseReference mRef;
 
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    Date date = new Date();
+
     String review;
+
 
     EditText reviewInput;
     Button submitBtn;
@@ -37,6 +45,7 @@ public class CreateReviewActivity extends AppCompatActivity {
         FirebaseUser user =  mAuth.getCurrentUser();
         return user.getUid().toString();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +116,7 @@ public class CreateReviewActivity extends AppCompatActivity {
                 mRef.child("Review").setValue(review);
                 mRef.child("User").setValue(getUserID());
                 mRef.child("Rating").setValue(ratingBar.getRating());
+                mRef.child("DatePosted").setValue(simpleDateFormat.format(date).toString());
 
                 String totalStars = "Total Stars:: " + ratingBar.getNumStars();
                 String rating = "Rating:: " + ratingBar.getRating();
