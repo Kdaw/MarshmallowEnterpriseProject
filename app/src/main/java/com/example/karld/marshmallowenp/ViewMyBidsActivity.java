@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +40,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
     private ListView acceptedJobs;
 
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = fbDatabase.getReference("Posts");
+    private DatabaseReference dbRef = fbDatabase.getReference("Bids");
 
     private int itemSelectedOpen = 0;
     private int itemSelectedAccepted = 0;
@@ -80,29 +82,29 @@ public class ViewMyBidsActivity extends AppCompatActivity {
 
         //addAcceptedChildEventListener();
 
-        openJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewMyBidsActivity.class);
-                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
-                String ident = openJobID[position];
-                intent.putExtra("id", ident);
-                startActivity(intent);
-            }
-        });
-
         acceptedJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewMyBidsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
                 System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
                 String ident = acceptedJobID[position];
                 intent.putExtra("id", ident);
                 startActivity(intent);
             }
         });
+
+//        acceptedJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position,
+//                                    long id) {
+//                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+//                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
+//                String ident = acceptedJobID[position];
+//                intent.putExtra("id", ident);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -114,19 +116,27 @@ public class ViewMyBidsActivity extends AppCompatActivity {
 
     private void addOpenChildEventListener() {
         ChildEventListener cListener = new ChildEventListener() {
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = dataSnapshot.getKey();
-                    openJobID[itemSelectedOpen] = key;
+                    acceptedJobID[itemSelectedOpen] = key;
                     System.out.println(openJobID[itemSelectedOpen]);
                     String name = ds.getKey();
                     openListKeys.add(name);
-                    if(name.equals("PostID")) {
-                        openAdapter.add(dataSnapshot.child(name).getValue(String.class));
-                        itemSelectedOpen++;
+                    if(dataSnapshot.child("BidderID").getValue(String.class).equals(currentUser.getUid())
+                            && dataSnapshot.child("Accepted").getValue(boolean.class) == true)
+                    {
+                        if(name.equals("PostTitle")) {
+                            openAdapter.add(dataSnapshot.child(name).getValue(String.class));
+                            itemSelectedOpen++;
+                        }
                     }
+
                 }
 
                 openListKeys.add(dataSnapshot.getKey());
@@ -163,6 +173,8 @@ public class ViewMyBidsActivity extends AppCompatActivity {
         };
         dbRef.addChildEventListener(cListener);
     }
+
+
 
 
 }
