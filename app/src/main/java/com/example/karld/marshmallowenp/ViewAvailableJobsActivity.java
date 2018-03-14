@@ -29,13 +29,11 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-
     /**
      * Implementation of the following was done using the information found at
      * http://www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
      * This describes how to fill a list view from a Firebase Realtime Database
      */
-
     private ArrayList<String> listItems = new ArrayList<>();
     private ArrayList<String> listKeys = new ArrayList<>();
     private ArrayAdapter<String> adapter;
