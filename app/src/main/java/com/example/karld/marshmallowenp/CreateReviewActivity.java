@@ -112,7 +112,7 @@ public class CreateReviewActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), ViewPostActivity.class);
                 intent.putExtra("Review_ID", review_id);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
     }
