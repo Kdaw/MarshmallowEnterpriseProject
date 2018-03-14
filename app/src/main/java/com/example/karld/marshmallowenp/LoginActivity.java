@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private void updateUI(FirebaseUser account) {
         if (account != null) {
             //TODO uncomment below line once testing completes
+
             loadHome();
         }
 //        else{

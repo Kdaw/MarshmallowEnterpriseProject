@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context="com.example.karld.marshmallowenp.ViewActiveJobsWithBidsActivity">
+    tools:context="com.example.karld.marshmallowenp.ViewActiveJobsWithBidsActivity"
+    android:id="@+id/drawerLayout">
+    <!--USE THIS (ABOVE) ^^^^^ LINE IN ALL-->
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +20,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@string/textview_view_active_jobs_with_bids"
+            android:text="@string/text_view_jobs_with_bids"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
