@@ -54,7 +54,6 @@ public class ViewMyBidsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_my_bids);
 
-
         //todo steal code from the view available jobs activity from karl
 
         //stolen variables required
@@ -85,7 +84,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewMyBidsActivity.class);
                 System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
                 String ident = openJobID[position];
                 intent.putExtra("id", ident);
@@ -97,7 +96,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewMyBidsActivity.class);
                 System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
                 String ident = acceptedJobID[position];
                 intent.putExtra("id", ident);
@@ -124,7 +123,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
                     System.out.println(openJobID[itemSelectedOpen]);
                     String name = ds.getKey();
                     openListKeys.add(name);
-                    if(name.equals("title")) {
+                    if(name.equals("PostID")) {
                         openAdapter.add(dataSnapshot.child(name).getValue(String.class));
                         itemSelectedOpen++;
                     }
