@@ -104,7 +104,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
                 System.out.println("ID just before adding to intent " + jobIDWithBids[position]);
                 String ident = jobIDWithBids[position];
                 intent.putExtra("id", ident);
@@ -123,7 +123,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),ViewAvailableJobDetailsActivity.class );
                 System.out.println("ID just before adding to intent " + jobIDNoBids[position]);
                 String ident = jobIDNoBids[position];
                 intent.putExtra("id", ident);
