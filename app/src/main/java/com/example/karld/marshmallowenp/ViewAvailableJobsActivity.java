@@ -46,8 +46,6 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
     private String[] jobID = new String[1000];
     public static final String MESSAGE = "message";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
