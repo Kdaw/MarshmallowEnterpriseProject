@@ -101,6 +101,9 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                }else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                    startActivity(in);
                 }
                 return true;
             }
@@ -146,6 +149,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 mRef.child("distance").setValue(distance);
                 mRef.child("User").setValue(getUserID());
                 mRef.child("Active").setValue(true);
+                mRef.child("HasBids").setValue(false);
 
                 //region Intent to send pushID
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);

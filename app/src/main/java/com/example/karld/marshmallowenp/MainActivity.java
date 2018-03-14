@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                }else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                    startActivity(in);
                 }
                 return true;
             }
@@ -106,7 +109,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startActivity(intent);
     }
 
-
+    public void myJobs(View view) {
+        Intent intent = new Intent(this, ViewActiveJobsWithBidsActivity.class);
+        startActivity(intent);
+    }
 
     private void signOut() {
         mGoogleSignInClient.signOut()
