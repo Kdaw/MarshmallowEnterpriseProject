@@ -64,6 +64,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                }else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                    startActivity(in);
                 }
                 return true;
             }

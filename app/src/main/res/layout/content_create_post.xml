@@ -14,19 +14,21 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/button_create_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="onClick"
-        android:text="@string/CreatePostButton"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/button_create_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/colorAccent"
+            android:onClick="onClick"
+            android:text="@string/CreatePostButton"
+            android:textAllCaps="false"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText.Title"
@@ -34,12 +36,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="Post Title"
-        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,27 +53,31 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="Post Details"
-        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText.Title" />
 
     <EditText
         android:id="@+id/editText.Pickup"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="Pickup Location"
-        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText.Details" />
 
@@ -79,12 +87,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="Dropoff Location"
-        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText.Pickup" />
 
@@ -94,12 +104,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="Distance"
-        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         android:inputType="textPersonName"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText.Dropoff" />
 
