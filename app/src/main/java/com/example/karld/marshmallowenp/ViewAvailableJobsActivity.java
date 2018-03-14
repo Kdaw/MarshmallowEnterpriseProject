@@ -52,6 +52,8 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_available_jobs);
 
+        //region matts code
+
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -96,6 +98,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                 return true;
             }
         });
+        //endregion
 
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
