@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.graphics.Color;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,13 +29,11 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-
     /**
      * Implementation of the following was done using the information found at
      * http://www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
      * This describes how to fill a list view from a Firebase Realtime Database
      */
-
     private ArrayList<String> listItems = new ArrayList<>();
     private ArrayList<String> listKeys = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -45,12 +44,17 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
     private String[] jobID = new String[1000];
     public static final String MESSAGE = "message";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_available_jobs);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
+
+        String uEmail = currentUser.getEmail();
+        String uName = currentUser.getDisplayName();
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -61,6 +65,10 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
 
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
+        txtProfileName.setText(uName);
+        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
+        txtProfileEmail.setText(uEmail);
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -79,20 +87,19 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
                     startActivity(in);
-                }else if (id == R.id.nav_settings) {
+                } else if (id == R.id.nav_settings) {
                     Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(in);
-                }else if (id == R.id.nav_Logout) {
+                } else if (id == R.id.nav_Logout) {
                     //todo figure a signout method that signs out locally
                     //signOut();
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                } else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                    startActivity(in);
                 }
-//                else if (id == R.id.) {
-//                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
-//                    startActivity(in);
-//                }
                 return true;
             }
         });
