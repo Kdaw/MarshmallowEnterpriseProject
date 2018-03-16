@@ -220,6 +220,8 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
 
                     String name = ds.getKey();
                     listKeysNoBids.add(name);
+                    //TODO try catch for null reference, ignore if null passed? -- see notebook
+                    //edit after presentation to attempt fixes... Only crashes on the initial runthrough!!!
                     if(dataSnapshot.child("User").getValue(String.class).equals(currentUser.getUid())
                             && dataSnapshot.child("HasBids").getValue(boolean.class) == false) {
                         if (name.equals("title")) {
