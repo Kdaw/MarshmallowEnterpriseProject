@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,13 +19,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class CreateReviewActivity extends AppCompatActivity {
     //region Description
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle   mToggle;
     private DatabaseReference mRef;
 
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    Date date = new Date();
+
     String review;
+
 
     EditText reviewInput;
     Button submitBtn;
@@ -38,6 +47,7 @@ public class CreateReviewActivity extends AppCompatActivity {
         return user.getUid().toString();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,14 +57,26 @@ public class CreateReviewActivity extends AppCompatActivity {
         int numOfStars = ratingBar.getNumStars();
         ratingBar.setRating((float) 1);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
+
+        String uEmail = currentUser.getEmail();
+        String uName = currentUser.getDisplayName();
+
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
+        txtProfileName.setText(uName);
+        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
+        txtProfileEmail.setText(uEmail);
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -107,6 +129,7 @@ public class CreateReviewActivity extends AppCompatActivity {
                 mRef.child("Review").setValue(review);
                 mRef.child("User").setValue(getUserID());
                 mRef.child("Rating").setValue(ratingBar.getRating());
+                mRef.child("DatePosted").setValue(simpleDateFormat.format(date).toString());
 
                 String totalStars = "Total Stars:: " + ratingBar.getNumStars();
                 String rating = "Rating:: " + ratingBar.getRating();
@@ -115,7 +138,7 @@ public class CreateReviewActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), ViewPostActivity.class);
                 intent.putExtra("Review_ID", review_id);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
     }
