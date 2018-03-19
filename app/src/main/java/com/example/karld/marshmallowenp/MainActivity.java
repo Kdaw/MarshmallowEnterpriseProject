@@ -93,9 +93,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 //        // Fire BaseCode -----------------------------------------------------------------------------------------------
 //        mAuth = FirebaseAuth.getInstance();
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
+
 //        //mDatabase.setValue(currentUser.getUid());
-//        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
+        //TODO Gareth rating init
+        //        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
+        //        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
 //        mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
     }
 
