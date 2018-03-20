@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
 
@@ -32,6 +35,13 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
+
+        String uEmail = currentUser.getEmail();
+        String uName = currentUser.getDisplayName();
+
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -41,6 +51,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
+        txtProfileName.setText(uName);
+        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
+        txtProfileEmail.setText(uEmail);
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -76,13 +90,15 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             }
         });
 
-        // Fire BaseCode -----------------------------------------------------------------------------------------------
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
-        //mDatabase.setValue(currentUser.getUid());
-        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
-        mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
+//        // Fire BaseCode -----------------------------------------------------------------------------------------------
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+//        //mDatabase.setValue(currentUser.getUid());
+        //TODO Gareth rating init
+        //        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
+        //        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
+//        mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
     }
 
 

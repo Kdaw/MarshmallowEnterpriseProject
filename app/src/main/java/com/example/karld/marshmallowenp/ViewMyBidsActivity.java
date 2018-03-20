@@ -86,11 +86,11 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
-                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
-                String ident = openJobID[position];
-                intent.putExtra("id", ident);
-                startActivity(intent);
+                Intent intentOpen = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                System.out.println("BLAH BLAH BLAH _____________________________" + openJobID[position]);
+                String identOpen = openJobID[position];
+                intentOpen.putExtra("id", identOpen);
+                startActivity(intentOpen);
             }
         });
 
@@ -98,11 +98,12 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
-                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
-                String ident = acceptedJobID[position];
-                intent.putExtra("id", ident);
-                startActivity(intent);
+                Intent intentAccepted = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                System.out.println(  "ARRAY NULL?????? ________________________" + acceptedJobID[0]);
+                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON" + acceptedJobID[position]);
+                String identAccepted = acceptedJobID[position];
+                intentAccepted.putExtra("id", identAccepted);
+                startActivity(intentAccepted);
             }
         });
 
@@ -113,6 +114,8 @@ public class ViewMyBidsActivity extends AppCompatActivity {
      * Child event Listener for the Open Jobs list view
      */
     //todo MAKE THIS WORK FOR WHAT I NEED IT TO -- NEEDS MAJOR CHANGING -- EG LINE 130 IN VIEWAVAILABLEJOBSACTIVITY
+    //todo getting null pointers for passing through the intent and also values in array are weirdly all null
+    //todo FIGURE THIS OUT
 
     private void addOpenChildEventListener() {
         ChildEventListener cListener = new ChildEventListener() {
@@ -124,22 +127,24 @@ public class ViewMyBidsActivity extends AppCompatActivity {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = dataSnapshot.getKey();
-                    acceptedJobID[itemSelectedOpen] = key;
-                    System.out.println(openJobID[itemSelectedOpen]);
+                    acceptedJobID[itemSelectedAccepted] = key;
+                    System.out.println(acceptedJobID[itemSelectedAccepted]);
                     String name = ds.getKey();
-                    openListKeys.add(name);
-                    if(dataSnapshot.child("BidderID").getValue(String.class).equals(currentUser.getUid())
-                            && dataSnapshot.child("Accepted").getValue(boolean.class) == true)
-                    {
-                        if(name.equals("PostTitle")) {
-                            openAdapter.add(dataSnapshot.child(name).getValue(String.class));
-                            itemSelectedOpen++;
+                    acceptedListKeys.add(name);
+
+                    try {
+                        if (dataSnapshot.child("BidderID").getValue(String.class).equals(currentUser.getUid())
+                                && dataSnapshot.child("Accepted").getValue(boolean.class) == true) {
+                            if (name.equals("PostTitle")) {
+                                acceptedAdapter.add(dataSnapshot.child(name).getValue(String.class));
+                                itemSelectedAccepted++;
+                            }
                         }
-                    }
+                    } catch (NullPointerException e) { }
 
                 }
 
-                openListKeys.add(dataSnapshot.getKey());
+                acceptedListKeys.add(dataSnapshot.getKey());
             }
 
             @Override
@@ -155,9 +160,9 @@ public class ViewMyBidsActivity extends AppCompatActivity {
                 int index = openListKeys.indexOf(key);
 
                 if (index != -1) {
-                    openListItems.remove(index);
-                    openListKeys.remove(index);
-                    openAdapter.notifyDataSetChanged();
+                    acceptedListItems.remove(index);
+                    acceptedListKeys.remove(index);
+                    acceptedAdapter.notifyDataSetChanged();
                 }
             }
 
