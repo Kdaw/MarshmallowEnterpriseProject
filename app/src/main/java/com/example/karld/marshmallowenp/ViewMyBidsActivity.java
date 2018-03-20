@@ -82,6 +82,18 @@ public class ViewMyBidsActivity extends AppCompatActivity {
 
         //addAcceptedChildEventListener();
 
+        openJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
+                String ident = openJobID[position];
+                intent.putExtra("id", ident);
+                startActivity(intent);
+            }
+        });
+
         acceptedJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -93,18 +105,6 @@ public class ViewMyBidsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        acceptedJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position,
-//                                    long id) {
-//                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
-//                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON");
-//                String ident = acceptedJobID[position];
-//                intent.putExtra("id", ident);
-//                startActivity(intent);
-//            }
-//        });
 
     }
 
