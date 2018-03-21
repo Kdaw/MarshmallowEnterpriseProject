@@ -57,6 +57,7 @@ public class ViewBidDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 DataSnapshot ds = dataSnapshot.child("Bids").child(bid);
+                String driver = dataSnapshot.child("Bids").child(bid).child("BidderID").getValue(String.class);
                 String aPostTitle = ds.child("PostID").getValue(String.class);
                 dbRef.child("Bids").child(bid).child("Accepted").setValue(true);
                 for (DataSnapshot loopDs : dataSnapshot.child("Bids").getChildren()){
@@ -65,6 +66,7 @@ public class ViewBidDetailsActivity extends AppCompatActivity {
                     if(bidId.equals(aPostTitle))
                         dbRef.child("Bids").child(loopDs.getKey()).child("Active").setValue(false);
                 }
+                dbRef.child("Posts").child(aPostTitle).child("Driver").setValue(driver);
             }
 
             @Override
