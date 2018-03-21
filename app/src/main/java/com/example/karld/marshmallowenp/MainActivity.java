@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
 //        //mDatabase.setValue(currentUser.getUid());
         //TODO Gareth rating init
-        //        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
-        //        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
-//        mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
+                mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
+        mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
     }
 
 
