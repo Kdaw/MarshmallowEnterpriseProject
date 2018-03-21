@@ -80,13 +80,13 @@ public class ViewMyBidsActivity extends AppCompatActivity {
 
         addOpenChildEventListener();
 
-        //addAcceptedChildEventListener();
+        addAcceptedChildEventListener();
 
         openJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intentOpen = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intentOpen = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
                 System.out.println("BLAH BLAH BLAH _____________________________" + openJobID[position]);
                 String identOpen = openJobID[position];
                 intentOpen.putExtra("id", identOpen);
@@ -98,11 +98,12 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intentAccepted = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intentAccepted = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
                 System.out.println(  "ARRAY NULL?????? ________________________" + acceptedJobID[0]);
                 System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON" + acceptedJobID[position]);
                 String identAccepted = acceptedJobID[position];
                 intentAccepted.putExtra("id", identAccepted);
+                System.out.println(intentAccepted.toString());
                 startActivity(intentAccepted);
             }
         });
@@ -113,11 +114,13 @@ public class ViewMyBidsActivity extends AppCompatActivity {
     /**
      * Child event Listener for the Open Jobs list view
      */
+
     //todo MAKE THIS WORK FOR WHAT I NEED IT TO -- NEEDS MAJOR CHANGING -- EG LINE 130 IN VIEWAVAILABLEJOBSACTIVITY
     //todo getting null pointers for passing through the intent and also values in array are weirdly all null
     //todo FIGURE THIS OUT
+    //todo think its done
 
-    private void addOpenChildEventListener() {
+    private void addAcceptedChildEventListener() {
         ChildEventListener cListener = new ChildEventListener() {
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -157,7 +160,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
                 //code from www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
                 //deals with removal from database to update snapshot
                 String key = dataSnapshot.getKey();
-                int index = openListKeys.indexOf(key);
+                int index = acceptedListKeys.indexOf(key);
 
                 if (index != -1) {
                     acceptedListItems.remove(index);
@@ -180,7 +183,71 @@ public class ViewMyBidsActivity extends AppCompatActivity {
     }
 
 
+    private void addOpenChildEventListener() {
 
+        ChildEventListener cListener = new ChildEventListener() {
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    openJobID[itemSelectedOpen] = key;
+                    System.out.println(openJobID[itemSelectedOpen]);
+                    String name = ds.getKey();
+                    openListKeys.add(name);
+                    String uID = currentUser.getUid();
+                    try {
+                        if (dataSnapshot.child("BidderID").getValue(String.class).equals(currentUser.getUid())
+                                && dataSnapshot.child("Accepted").getValue(boolean.class) == false
+                                && dataSnapshot.child("Active").getValue(boolean.class) == true){
+
+                            if (name.equals("PostTitle")) {
+                                openAdapter.add(dataSnapshot.child(name).getValue(String.class));
+                                itemSelectedOpen++;
+                            }
+                        }
+                    } catch (NullPointerException e) { }
+
+                }
+
+                openListKeys.add(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                //code from www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
+                //deals with removal from database to update snapshot
+                String key = dataSnapshot.getKey();
+                int index = openListKeys.indexOf(key);
+
+                if (index != -1) {
+                    openListItems.remove(index);
+                    openListKeys.remove(index);
+                    openAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        };
+        dbRef.addChildEventListener(cListener);
+    }
 
 }
 
