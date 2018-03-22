@@ -151,7 +151,8 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                     System.out.println(jobID[itemSelected]);
                     String name = ds.getKey();
                     listKeys.add(name);
-                    if(name.equals("title")) {
+                    if(name.equals("title") && dataSnapshot.child("Active").getValue().equals(true)
+                            && dataSnapshot.child("Driver").getValue() == null) {
                         adapter.add(dataSnapshot.child(name).getValue(String.class));
                         itemSelected++;
                     }
