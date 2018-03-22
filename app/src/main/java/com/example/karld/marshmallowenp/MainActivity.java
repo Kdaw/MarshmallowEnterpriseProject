@@ -130,6 +130,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startActivity(intent);
     }
 
+    public void myBids(View view) {
+        Intent intent = new Intent(this, ViewMyBidsActivity.class);
+        startActivity(intent);
+    }
+
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
