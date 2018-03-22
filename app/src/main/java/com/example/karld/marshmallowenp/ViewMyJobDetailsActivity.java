@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,37 +21,29 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileSettingsActivity extends AppCompatActivity {
+public class ViewMyJobDetailsActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle   mToggle;
+    private ActionBarDrawerToggle mToggle;
+    private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = fbDatabase.getReference("Posts");
+    private String postedBy;
+    private DatabaseReference mRef;
+    private DatabaseReference bRef;
+    private Button button;
+    private String pTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_settings);
+        setContentView(R.layout.activity_view_my_job_details);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
 
-        final TextView vEmail = findViewById(R.id.textview_email);
-        final String email = mDatabaseUsers.getKey();
-        vEmail.setText(email);
-        mDatabaseUsers.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                vEmail.setText(value);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
         String uEmail = currentUser.getEmail();
         String uName = currentUser.getDisplayName();
-
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -66,7 +61,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks.
+                // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
@@ -97,17 +92,49 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        final TextView title = findViewById(R.id.textView_JobDetailTitle);
+        final TextView detail = findViewById(R.id.textView_JobDetailsDescription);
+        final TextView pickup = findViewById(R.id.textView_JobDetailsPickup);
+        final TextView dropoff = findViewById(R.id.textView_JobDetailsDropoff);
+        final TextView distance = findViewById(R.id.textView_JobDetailsDistance);
+
+
+
+        Intent intentExtra = getIntent();
+
+        final String postID = intentExtra.getStringExtra("id");
+        System.out.println("Intent section " + postID);
+
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println(postID);
+                DataSnapshot ds = dataSnapshot.child(postID);
+                String sTitle ="Title: " + ds.child("title").getValue(String.class);
+                pTitle = ds.child("title").getValue(String.class);
+                String sDetails ="Details: " + ds.child("details").getValue(String.class);
+                String sPickup ="Pickup From: " + ds.child("pickup").getValue(String.class);
+                String sDropoff ="Deliver to: " + ds.child("dropoff").getValue(String.class);
+                String sDistance ="Route Distance: " + ds.child("distance").getValue(String.class);
+                postedBy = ds.child("User").getValue(String.class);
+                System.out.println(sTitle);
+                title.setText(sTitle);
+                detail.setText(sDetails);
+                pickup.setText(sPickup);
+                dropoff.setText(sDropoff);
+                distance.setText(sDistance);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
-    public void openJobHistory(View v){
-        Intent intent = new Intent(this, MyJobsHistoryActivity.class);
-        startActivity(intent);
-    }
 
-    public void openBidHistory(View v){
-        Intent intent = new Intent(this, MyBidsHistoryActivity.class);
-        startActivity(intent);
-    }
 
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override
