@@ -49,12 +49,16 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_available_jobs);
 
+
+        //region matts code
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
 
         String uEmail = currentUser.getEmail();
         String uName = currentUser.getDisplayName();
+
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -103,6 +107,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                 return true;
             }
         });
+        //endregion
 
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
