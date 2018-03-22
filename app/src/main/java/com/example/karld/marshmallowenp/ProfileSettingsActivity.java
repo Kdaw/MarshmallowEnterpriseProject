@@ -104,6 +104,11 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openBidHistory(View v){
+        Intent intent = new Intent(this, MyBidsHistoryActivity.class);
+        startActivity(intent);
+    }
+
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
