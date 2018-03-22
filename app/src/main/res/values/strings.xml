@@ -80,6 +80,9 @@
     <string name="text_view_jobs_with_bids">Jobs With Bids</string>
     <string name="textview_bid_details_title">Bid Details</string>
     <string name="button_accept_bid">Accept Bid</string>
+    <string name="button_post_history">Job History</string>
+    <string name="button_bid_history">Bid History</string>
+    <string name="textview_JobHistoryTitle">Job History</string>
 
 
 </resources>

@@ -29,22 +29,16 @@
             android:label="Home Screen" />
         <activity
             android:name=".CreatePostActivity"
-
-            android:label="@string/title_activity_create_post"/>
-
-        <activity android:name=".ProfileSettingsActivity"
+            android:label="@string/title_activity_create_post" />
+        <activity
+            android:name=".ProfileSettingsActivity"
             android:label="Account" />
-
         <activity
             android:name=".ViewPostActivity"
             android:label="View Post" />
-
         <activity
             android:name=".CreateReviewActivity"
-
-            android:label="User Review Page"/>
-
-
+            android:label="User Review Page" />
         <activity
             android:name=".ViewAvailableJobsActivity"
             android:label="Available Jobs" />
@@ -59,16 +53,12 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings" />
-
-
-        <activity android:name=".ViewMyBidsActivity"></activity>
-
-
+        <activity android:name=".ViewMyBidsActivity" />
         <activity android:name=".ViewActiveJobsWithBidsActivity" />
-
         <activity android:name=".ViewBidDetailsActivity" />
-        <activity android:name=".RankingActivity"></activity>
-
+        <activity android:name=".RankingActivity" />
+        <activity android:name=".MyJobsHistoryActivity" />
+        <activity android:name=".MyBidsHistoryActivity"></activity>
     </application>
 
 </manifest>
