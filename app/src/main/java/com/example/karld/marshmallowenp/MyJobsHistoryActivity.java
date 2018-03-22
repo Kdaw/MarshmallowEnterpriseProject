@@ -185,6 +185,8 @@ public class MyJobsHistoryActivity extends AppCompatActivity {
             }
         };
         dbRef.addChildEventListener(cListener);
+
+
     }
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override

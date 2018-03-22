@@ -58,7 +58,9 @@
         <activity android:name=".ViewBidDetailsActivity" />
         <activity android:name=".RankingActivity" />
         <activity android:name=".MyJobsHistoryActivity" />
-        <activity android:name=".MyBidsHistoryActivity"></activity>
+        <activity android:name=".MyBidsHistoryActivity" />
+        <activity android:name=".ViewMyBidDetailsActivity" />
+        <activity android:name=".ViewMyJobDetailsActivity"></activity>
     </application>
 
 </manifest>
