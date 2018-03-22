@@ -67,12 +67,16 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
+
+        //region Matts Code
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
 
         String uEmail = currentUser.getEmail();
         String uName = currentUser.getDisplayName();
+
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -121,6 +125,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 return true;
             }
         });
+        //endregion
 
         titleInput = (EditText) findViewById(R.id.editText_Title);
         detailInput = (EditText) findViewById(R.id.editText_Details);
@@ -143,9 +148,9 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 String postID = fullPostID.replace(removeLink, "");
                     //this removes the firebase link and leaves postID as just the value required
 
-
 //              Toast.makeText(CreatePostActivity.this, postID,
 //              Toast.LENGTH_LONG).show();
+
                 //endregion
 
                 title = titleInput.getText().toString();
