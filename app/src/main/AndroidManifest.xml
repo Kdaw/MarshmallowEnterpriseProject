@@ -57,7 +57,12 @@
         <activity android:name=".ViewActiveJobsWithBidsActivity" />
         <activity android:name=".ViewBidDetailsActivity" />
         <activity android:name=".RankingActivity" />
+
         <activity android:name=".ViewMyDriverJobsActivity"></activity>
+
+        <activity android:name=".MyJobsHistoryActivity" />
+        <activity android:name=".MyBidsHistoryActivity"></activity>
+
     </application>
 
 </manifest>
