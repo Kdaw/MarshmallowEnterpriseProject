@@ -131,7 +131,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
-            Intent intent = new Intent(getApplicationContext(), ViewMyJobDetailsActivity.class); //------------------------------------ HERE
+            Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class); //------------------------------------ HERE
             System.out.println("ID just before adding to intent " + jobID[position]);
             String ident = jobID[position];
             intent.putExtra("id", ident);
