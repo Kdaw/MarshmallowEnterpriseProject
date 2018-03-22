@@ -53,52 +53,52 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
         String uName = currentUser.getDisplayName();
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
-        NavigationView nV = (NavigationView) findViewById(R.id.nav_menu);
-        TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
-        txtProfileName.setText(uName);
-        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
-        txtProfileEmail.setText(uEmail);
-        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks here.
-                int id = menuItem.getItemId();
-
-                if (id == R.id.nav_home) {
-                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(in);
-                } else if (id == R.id.nav_create_post) {
-                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
-                    startActivity(in);
-                } else if (id == R.id.nav_view_jobs) {
-                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
-                    startActivity(in);
-                } else if (id == R.id.nav_account) {
-                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
-                    startActivity(in);
-                } else if (id == R.id.nav_settings) {
-                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
-                    startActivity(in);
-                } else if (id == R.id.nav_Logout) {
-                    //todo figure a signout method that signs out locally
-                    //signOut();
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                } else if (id == R.id.nav_my_jobs) {
-                    Intent in = new Intent(getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
-                    startActivity(in);
-                }
-                return true;
-            }
-        });
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+//        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+//        mDrawerLayout.addDrawerListener(mToggle);
+//        mToggle.syncState();
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
+//        NavigationView nV = (NavigationView) findViewById(R.id.nav_menu);
+//        TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
+//        txtProfileName.setText(uName);
+//        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
+//        txtProfileEmail.setText(uEmail);
+//        nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                // Handle navigation view item clicks here.
+//                int id = menuItem.getItemId();
+//
+//                if (id == R.id.nav_home) {
+//                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+//                    startActivity(in);
+//                } else if (id == R.id.nav_create_post) {
+//                    Intent in = new Intent(getApplicationContext(), CreatePostActivity.class);
+//                    startActivity(in);
+//                } else if (id == R.id.nav_view_jobs) {
+//                    Intent in = new Intent(getApplicationContext(), ViewAvailableJobsActivity.class);
+//                    startActivity(in);
+//                } else if (id == R.id.nav_account) {
+//                    Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
+//                    startActivity(in);
+//                } else if (id == R.id.nav_settings) {
+//                    Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
+//                    startActivity(in);
+//                } else if (id == R.id.nav_Logout) {
+//                    //todo figure a signout method that signs out locally
+//                    //signOut();
+//                    FirebaseAuth.getInstance().signOut();
+//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                    startActivity(intent);
+//                } else if (id == R.id.nav_my_jobs) {
+//                    Intent in = new Intent(getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+//                    startActivity(in);
+//                }
+//                return true;
+//            }
+//        });
         //endregion
 
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
@@ -148,11 +148,16 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
                     System.out.println(jobID[itemSelected]);
                     String name = ds.getKey();
                     listKeys.add(name);
-                    if(name.equals("title") && dataSnapshot.child("Accepted").getValue().equals(true)
-                            && dataSnapshot.child("Driver").getValue() == currentUser.getUid()) {
-                        adapter.add(dataSnapshot.child(name).getValue(String.class));
-                        itemSelected++;
-                    }
+
+                    try {
+                        if(name.equals("title")) {
+                            if (dataSnapshot.child("Driver").getValue(String.class).equals(currentUser.getUid())) {
+                                adapter.add(dataSnapshot.child(name).getValue(String.class));
+                                itemSelected++;
+                            }
+                        }
+                    } catch (NullPointerException e) { }
+
                 }
 
                 listKeys.add(dataSnapshot.getKey());

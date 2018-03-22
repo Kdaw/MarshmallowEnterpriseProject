@@ -14,7 +14,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="View My Driver Jobs - Working Title"
+        android:text="My Available Deliveries"
         android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,13 @@
         android:id="@+id/ListView_viewMyDriverJobs"
         android:layout_width="368dp"
         android:layout_height="449dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@color/white"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="54dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView.ViewMyDriverJobs" />
 </android.support.constraint.ConstraintLayout>

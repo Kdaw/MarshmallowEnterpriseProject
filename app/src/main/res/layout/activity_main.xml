@@ -52,6 +52,16 @@
             app:layout_constraintBottom_toTopOf="@+id/button2"
             app:layout_constraintEnd_toStartOf="@+id/button.mainMyJobs"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button.ViewMyDriverJobs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="myDriverJobs"
+            android:text="View My Available Deliveries"
+            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
