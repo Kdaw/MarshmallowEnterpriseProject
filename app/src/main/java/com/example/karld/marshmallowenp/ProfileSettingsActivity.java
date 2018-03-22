@@ -99,6 +99,11 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         });
     }
 
+    public void openJobHistory(View v){
+        Intent intent = new Intent(this, MyJobsHistoryActivity.class);
+        startActivity(intent);
+    }
+
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
