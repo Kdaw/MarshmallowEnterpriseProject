@@ -99,7 +99,7 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/back"
             android:ems="10"
-            android:hint="Enter Your Bid"
+            android:hint="Enter Your Bid (£)"
             android:inputType="number"
             android:padding="2.5dp"
             android:textColorHint="@color/common_google_signin_btn_text_dark_default"
