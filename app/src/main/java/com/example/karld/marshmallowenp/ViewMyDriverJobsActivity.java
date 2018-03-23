@@ -104,7 +104,7 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
         availableJobs = (ListView) findViewById(R.id.ListView_viewMyDriverJobs);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
         availableJobs.setAdapter(adapter);
         availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         //availableJobs.setTextColor(Color.parseColor("#FFFFFF"));

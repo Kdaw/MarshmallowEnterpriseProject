@@ -103,7 +103,7 @@ public class MyJobsHistoryActivity extends AppCompatActivity {
         //endregion
 
         availableJobs = (ListView) findViewById(R.id.ListView_MyJobsHistory);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
         availableJobs.setAdapter(adapter);
         availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         //availableJobs.setTextColor(Color.parseColor("#FFFFFF"));
@@ -122,7 +122,7 @@ public class MyJobsHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewMyJobDetailsActivity.class);
                 System.out.println("ID just before adding to intent " + jobID[position]);
                 String ident = jobID[position];
                 intent.putExtra("id", ident);

@@ -103,7 +103,7 @@ public class MyBidsHistoryActivity extends AppCompatActivity {
         //endregion
 
         myBids = (ListView) findViewById(R.id.ListView_MyBidsHistory);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
         myBids.setAdapter(adapter);
         myBids.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 

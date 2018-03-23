@@ -113,7 +113,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
         });
 
         availableJobsWithBids = (ListView) findViewById(R.id.ListView_ViewActiveWithBids);
-        adapterWithBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItemsWithBids);
+        adapterWithBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItemsWithBids);
         availableJobsWithBids.setAdapter(adapterWithBids);
         availableJobsWithBids.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -132,7 +132,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
         });
 
         availableJobsNoBids = (ListView) findViewById(R.id.ListView_ViewActiveNoBids);
-        adapterNoBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItemsNoBids);
+        adapterNoBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItemsNoBids);
         availableJobsNoBids.setAdapter(adapterNoBids);
         availableJobsNoBids.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 

@@ -65,12 +65,12 @@ public class ViewMyBidsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewMyBidsActivity.class);
 
         openJobs = (ListView) findViewById(R.id.ListView_viewMyOpenBids);
-            openAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, openListItems);
+            openAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, openListItems);
             openJobs.setAdapter(openAdapter);
             openJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         acceptedJobs = (ListView) findViewById(R.id.ListView_viewMyAcceptedBids);
-            acceptedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, acceptedListItems);
+            acceptedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, acceptedListItems);
             acceptedJobs.setAdapter(acceptedAdapter);
             acceptedJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
