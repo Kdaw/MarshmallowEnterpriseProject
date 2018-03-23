@@ -112,7 +112,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
 
         availableJobs = (ListView) findViewById(R.id.ListView_AvailableJobs);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, listItems);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
         availableJobs.setAdapter(adapter);
         availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         //availableJobs.setTextColor(Color.parseColor("#FFFFFF"));
@@ -151,11 +151,13 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                     System.out.println(jobID[itemSelected]);
                     String name = ds.getKey();
                     listKeys.add(name);
-                    if(name.equals("title") && dataSnapshot.child("Active").getValue().equals(true)
-                            && dataSnapshot.child("Driver").getValue() == null) {
-                        adapter.add(dataSnapshot.child(name).getValue(String.class));
-                        itemSelected++;
-                    }
+                    try {
+                        if (name.equals("title") && dataSnapshot.child("Active").getValue().equals(true)
+                                && dataSnapshot.child("Driver").getValue() == null) {
+                            adapter.add(dataSnapshot.child(name).getValue(String.class));
+                            itemSelected++;
+                        }
+                    } catch (NullPointerException e) { /* Cannot check snapshot before it exists */}
                 }
 
                 listKeys.add(dataSnapshot.getKey());
