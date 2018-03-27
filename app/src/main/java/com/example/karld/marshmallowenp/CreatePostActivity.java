@@ -168,6 +168,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 mRef.child("User").setValue(getUserID());
                 mRef.child("Active").setValue(true);
                 mRef.child("HasBids").setValue(false);
+                mRef.child("Completed").setValue(false);    //Completed value for viewmydriverjobdetails
 
                 //region Intent to send pushID
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
