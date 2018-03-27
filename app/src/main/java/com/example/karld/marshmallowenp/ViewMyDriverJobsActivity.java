@@ -151,7 +151,8 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
 
                     try {
                         if(name.equals("title")) {
-                            if (dataSnapshot.child("Driver").getValue(String.class).equals(currentUser.getUid())) {
+                            if (dataSnapshot.child("Driver").getValue(String.class).equals(currentUser.getUid()) &&
+                                    dataSnapshot.child("Completed").getValue(boolean.class) == false) { //compelete check for view mydriverjobdetails
                                 adapter.add(dataSnapshot.child(name).getValue(String.class));
                                 itemSelected++;
                             }
