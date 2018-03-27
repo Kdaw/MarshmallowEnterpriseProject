@@ -123,7 +123,7 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intent = new Intent(getApplicationContext(), ViewMyJobDetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewMyDriverJobDetailsActivity.class);
                 System.out.println("ID just before adding to intent " + jobID[position]);
                 String ident = jobID[position];
                 intent.putExtra("id", ident);
@@ -152,7 +152,8 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
                     try {
                         if(name.equals("title")) {
                             if (dataSnapshot.child("Driver").getValue(String.class).equals(currentUser.getUid()) &&
-                                    dataSnapshot.child("Completed").getValue(boolean.class) == false) { //compelete check for view mydriverjobdetails
+                                    dataSnapshot.child("Completed").getValue(boolean.class) == false ||
+                                    dataSnapshot.child("Completed").getValue(boolean.class) == null ) { //compelete check for view mydriverjobdetails
                                 adapter.add(dataSnapshot.child(name).getValue(String.class));
                                 itemSelected++;
                             }
