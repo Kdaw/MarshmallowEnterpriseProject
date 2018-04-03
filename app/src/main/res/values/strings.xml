@@ -85,6 +85,8 @@
     <string name="textview_JobHistoryTitle">Job History</string>
     <string name="textview_MyBidsHistory">Bid History</string>
     <string name="button_job_completed">Mark As Complete</string>
+    <string name="button_pickup_location">Select Pickup</string>
+    <string name="button_dropoff_location">Select Dropoff</string>
 
 
 </resources>
