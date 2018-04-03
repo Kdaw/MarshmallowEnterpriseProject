@@ -98,7 +98,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         final TextView detail = findViewById(R.id.textView_JobDetailsDescription);
         final TextView pickup = findViewById(R.id.textView_JobDetailsPickup);
         final TextView dropoff = findViewById(R.id.textView_JobDetailsDropoff);
-        final TextView distance = findViewById(R.id.textView_JobDetailsDistance);
+
 
         button = findViewById(R.id.button_JobDetailsBidNow);
         button.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +132,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
                 detail.setText(sDetails);
                 pickup.setText(sPickup);
                 dropoff.setText(sDropoff);
-                distance.setText(sDistance);
+
 
             }
             @Override

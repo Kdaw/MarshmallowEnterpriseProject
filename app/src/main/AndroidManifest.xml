@@ -63,6 +63,10 @@
         <activity android:name=".ViewMyBidDetailsActivity" />
         <activity android:name=".ViewMyJobDetailsActivity" />
         <activity android:name=".ViewMyDriverJobDetailsActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAt90byXlZrt6oG5O8OZMOR9fu9B0NTvAI"/>
     </application>
 
 </manifest>

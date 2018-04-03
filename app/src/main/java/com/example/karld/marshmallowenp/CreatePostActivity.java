@@ -1,8 +1,10 @@
 package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,12 +15,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.PlaceFilter;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CreatePostActivity extends AppCompatActivity /*implements View.OnClickListener*/{
+
+public class CreatePostActivity extends AppCompatActivity /*implements View.OnClickListener*/ {
 
     //todo add comments and manage readability
     //todo Finish CreatePostActivity
@@ -46,6 +56,8 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     EditText DistanceInput;
     TextView pickupFrom;
     TextView deliverTo;
+    final int PLACE_PICKER_PICKUP = 1;
+    final int PLACE_PICKER_DROPOFF = 2;
 
     Button postButton;
     //endregion
@@ -56,17 +68,15 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
      * and returns the ID as a String
      * @return
      */
-    public static String getUserID()
-    {
+    public static String getUserID() {
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user =  mAuth.getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
         return user.getUid().toString();
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
@@ -82,14 +92,14 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
-        mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
-        NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        NavigationView nV = (NavigationView) findViewById(R.id.nav_menu);
         TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
         txtProfileName.setText(uName);
         TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
@@ -112,17 +122,17 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 } else if (id == R.id.nav_account) {
                     Intent in = new Intent(getApplicationContext(), ProfileSettingsActivity.class);
                     startActivity(in);
-                }else if (id == R.id.nav_settings) {
+                } else if (id == R.id.nav_settings) {
                     Intent in = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(in);
-                }else if (id == R.id.nav_Logout) {
+                } else if (id == R.id.nav_Logout) {
                     //todo figure a signout method that signs out locally
                     //signOut();
                     FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
-                }else if (id == R.id.nav_my_jobs) {
-                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                } else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent(getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
                     startActivity(in);
                 }
                 return true;
@@ -142,16 +152,15 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
         postButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v)
-            {
-                mRef =  FirebaseDatabase.getInstance().getReference().child("Posts").push();
+            public void onClick(View v) {
+                mRef = FirebaseDatabase.getInstance().getReference().child("Posts").push();
 
 
                 //region Save push()value for postID
                 String fullPostID = mRef.toString();
-                    //this saves the push link with the firebase link before it, which needs removing
+                //this saves the push link with the firebase link before it, which needs removing
                 String postID = fullPostID.replace(removeLink, "");
-                    //this removes the firebase link and leaves postID as just the value required
+                //this removes the firebase link and leaves postID as just the value required
 
 //              Toast.makeText(CreatePostActivity.this, postID,
 //              Toast.LENGTH_LONG).show();
@@ -168,7 +177,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 } catch (NullPointerException e) { /* These haven't been set, null check comes later */}
 
 
-                if(!pickup.equals("Pickup From") || !dropoff.equals("Deliver To")) {
+                if (!pickup.equals("Pickup From") || !dropoff.equals("Deliver To")) {
                     mRef.child("title").setValue(title);
                     mRef.child("details").setValue(details);
                     mRef.child("pickup").setValue(pickup);
@@ -184,7 +193,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     intent.putExtra("POST_ID", postID);
                     startActivity(intent);
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Please select valid locations", Toast.LENGTH_LONG).show();
                 }
                 //endregion
@@ -194,17 +203,51 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if(mToggle.onOptionsItemSelected(item))
-        {
-            return  true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mToggle.onOptionsItemSelected(item)) {
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     //PlacePicker buttons and code
+    public void selectPickupLocation(View v) {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(this), PLACE_PICKER_PICKUP);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void selectDropoffLocation(View v){
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(this), PLACE_PICKER_DROPOFF);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //Pickup location place
+        if (requestCode == PLACE_PICKER_PICKUP) {
+            Place place = PlacePicker.getPlace(data, this);
+            String pickup = String.format("%s %s", place.getName() , place.getAddress());
+            pickupFrom.setText(pickup);
+        }
+        if (requestCode == PLACE_PICKER_DROPOFF) {
+            Place place = PlacePicker.getPlace(data, this);
+            String dropoff = String.format("%s %s", place.getName() , place.getAddress());
+            deliverTo.setText(dropoff);
+        }
+
+    }
 }
 
 //button click listener
