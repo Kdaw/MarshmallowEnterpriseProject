@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,6 +44,8 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
     EditText PickupLocationInput;
     EditText DropoffLocationInput;
     EditText DistanceInput;
+    TextView pickupFrom;
+    TextView deliverTo;
 
     Button postButton;
     //endregion
@@ -129,9 +132,11 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
         titleInput = (EditText) findViewById(R.id.editText_Title);
         detailInput = (EditText) findViewById(R.id.editText_Details);
-        PickupLocationInput = (EditText) findViewById(R.id.editText_Pickup);
-        DropoffLocationInput = (EditText) findViewById(R.id.editText_Dropoff);
-        DistanceInput = (EditText) findViewById(R.id.editText_Distance);
+//        PickupLocationInput = (EditText) findViewById(R.id.editText_Pickup);
+//        DropoffLocationInput = (EditText) findViewById(R.id.editText_Dropoff);
+//        DistanceInput = (EditText) findViewById(R.id.editText_Distance);
+        pickupFrom = (TextView) findViewById(R.id.textView_PPPickupLocation);
+        deliverTo = (TextView) findViewById(R.id.textView_PPDropoffLocation);
 
         postButton = (Button) findViewById(R.id.button_create_post);
         postButton.setOnClickListener(new View.OnClickListener() {
@@ -155,25 +160,33 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
                 title = titleInput.getText().toString();
                 details = detailInput.getText().toString();
-                pickup = PickupLocationInput.getText().toString();
-                dropoff = DropoffLocationInput.getText().toString();
-                distance = DistanceInput.getText().toString();
+
+                try {
+                    pickup = pickupFrom.getText().toString();
+                    dropoff = deliverTo.getText().toString();
+                    distance = DistanceInput.getText().toString();
+                } catch (NullPointerException e) { /* These haven't been set, null check comes later */}
 
 
-                mRef.child("title").setValue(title);
-                mRef.child("details").setValue(details);
-                mRef.child("pickup").setValue(pickup);
-                mRef.child("dropoff").setValue(dropoff);
-                mRef.child("distance").setValue(distance);
-                mRef.child("User").setValue(getUserID());
-                mRef.child("Active").setValue(true);
-                mRef.child("HasBids").setValue(false);
-                mRef.child("Completed").setValue(false);    //Completed value for viewmydriverjobdetails
+                if(!pickup.equals("Pickup From") || !dropoff.equals("Deliver To")) {
+                    mRef.child("title").setValue(title);
+                    mRef.child("details").setValue(details);
+                    mRef.child("pickup").setValue(pickup);
+                    mRef.child("dropoff").setValue(dropoff);
+                    mRef.child("distance").setValue(distance);
+                    mRef.child("User").setValue(getUserID());
+                    mRef.child("Active").setValue(true);
+                    mRef.child("HasBids").setValue(false);
+                    mRef.child("Completed").setValue(false);    //Completed value for viewmydriverjobdetails
 
-                //region Intent to send pushID
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.putExtra("POST_ID", postID);
-                startActivity(intent);
+                    //region Intent to send pushID
+
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.putExtra("POST_ID", postID);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Please select valid locations", Toast.LENGTH_LONG).show();
+                }
                 //endregion
             }
         });
@@ -189,6 +202,9 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
         }
         return super.onOptionsItemSelected(item);
     }
+
+    //PlacePicker buttons and code
+
 }
 
 //button click listener
