@@ -19,7 +19,7 @@
 
 ### Who do I talk to? ###
 
-Karl Daw
-Jacob Norris
-Gareth Carman
-Matthew Phillips
+Karl Daw  
+Jacob Norris  
+Gareth Carman  
+Matthew Phillips  
