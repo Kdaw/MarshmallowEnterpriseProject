@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ViewAvailableJobsActivity extends AppCompatActivity {
 
@@ -155,6 +156,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                         if (name.equals("title") && dataSnapshot.child("Active").getValue().equals(true)
                                 && dataSnapshot.child("Driver").getValue() == null) {
                             adapter.add(dataSnapshot.child(name).getValue(String.class));
+
                             itemSelected++;
                         }
                     } catch (NullPointerException e) { /* Cannot check snapshot before it exists */}

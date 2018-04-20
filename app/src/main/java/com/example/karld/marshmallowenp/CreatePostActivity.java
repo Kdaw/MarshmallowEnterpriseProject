@@ -27,6 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class CreatePostActivity extends AppCompatActivity /*implements View.OnClickListener*/ {
 
@@ -39,7 +42,8 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
     //region Instance Variables
     private DatabaseReference mRef;
-
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    Date date = new Date();
     String title;
     String details;
     String dropoff;
@@ -187,7 +191,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                     mRef.child("Active").setValue(true);
                     mRef.child("HasBids").setValue(false);
                     mRef.child("Completed").setValue(false);    //Completed value for viewmydriverjobdetails
-
+                    mRef.child("PostDate").setValue(simpleDateFormat.format(date).toString());
                     //region Intent to send pushID
 
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
