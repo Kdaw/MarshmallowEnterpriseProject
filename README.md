@@ -19,7 +19,7 @@
 
 ### Who do I talk to? ###
 
-Karl Daw  
-Jacob Norris  
-Gareth Carman  
-Matthew Phillips  
+Karl Daw - s6089158  
+Jacob Norris - s6105214  
+Gareth Carman -   
+Matthew Phillips -   
