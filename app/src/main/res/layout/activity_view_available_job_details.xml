@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:padding="2.5"
+            android:padding="2.5dp"
             android:text="Title"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:padding="2.5"
+            android:padding="2.5dp"
             android:text="Details"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:padding="2.5"
+            android:padding="2.5dp"
             android:text="Pickup"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
@@ -71,40 +71,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:padding="2.5"
+            android:padding="2.5dp"
             android:text="Dropoff"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsPickup" />
 
-        <TextView
-            android:id="@+id/textView.JobDetailsDistance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="2.5"
-            android:text="Distance"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDropoff" />
-
         <EditText
             android:id="@+id/editText.JobDetailsBidValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="64dp"
             android:background="@drawable/back"
             android:ems="10"
-            android:hint="Enter Your Bid"
+            android:hint="Enter Your Bid (£)"
             android:inputType="number"
-            android:padding="2.5"
-            android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+            android:padding="2.5dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textColorHint="#D3D3D3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDistance" />
+            app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDropoff" />
 
         <Button
             android:id="@+id/button.JobDetailsBidNow"
@@ -112,11 +100,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="56dp"
             android:text="@string/button_bid_on_job"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editText.JobDetailsBidValue"
-            app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDistance" />
+            app:layout_constraintTop_toBottomOf="@+id/textView.JobDetailsDropoff" />
 
     </android.support.constraint.ConstraintLayout>
 

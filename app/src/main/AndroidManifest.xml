@@ -3,7 +3,7 @@
     package="com.example.karld.marshmallowenp">
     Allows for reading Files--------------------------------------------------
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- PERMISSIONS -->
     <!-- Location services -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -29,8 +29,7 @@
             android:label="Home Screen" />
         <activity
             android:name=".CreatePostActivity"
-            android:label="@string/title_activity_create_post"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_create_post" />
         <activity
             android:name=".ProfileSettingsActivity"
             android:label="Account" />
@@ -54,9 +53,21 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings" />
+        <activity android:name=".ViewMyBidsActivity" />
         <activity android:name=".ViewActiveJobsWithBidsActivity" />
         <activity android:name=".ViewBidDetailsActivity" />
-        <activity android:name=".RankingActivity"></activity>
+        <activity android:name=".RankingActivity" />
+        <activity android:name=".ViewMyDriverJobsActivity" />
+        <activity android:name=".MyJobsHistoryActivity" />
+        <activity android:name=".MyBidsHistoryActivity" />
+        <activity android:name=".ViewMyBidDetailsActivity" />
+        <activity android:name=".ViewMyJobDetailsActivity" />
+        <activity android:name=".ViewMyDriverJobDetailsActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAt90byXlZrt6oG5O8OZMOR9fu9B0NTvAI" />
+
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -16,11 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DrawerLayout mDrawerLayout;
@@ -31,6 +36,12 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
+
+        String uEmail = currentUser.getEmail();
+        String uName = currentUser.getDisplayName();
 
         // Slider Menu Code ----------------------------------------------------------------------------------------------
         mDrawerLayout = (DrawerLayout) findViewById (R.id.drawerLayout);
@@ -41,6 +52,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         // Nav Menu linking - Links Activities From Nav Menu ---------------------------------------------------------------
         NavigationView nV =(NavigationView)findViewById(R.id.nav_menu);
+        TextView txtProfileName = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavUser);
+        txtProfileName.setText(uName);
+        TextView txtProfileEmail = (TextView) nV.getHeaderView(0).findViewById(R.id.textView_NavEmail);
+        txtProfileEmail.setText(uEmail);
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -76,12 +91,14 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             }
         });
 
-        // Fire BaseCode -----------------------------------------------------------------------------------------------
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
-        //mDatabase.setValue(currentUser.getUid());
-        mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
+//        // Fire BaseCode -----------------------------------------------------------------------------------------------
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+//        //mDatabase.setValue(currentUser.getUid());
+        //TODO Gareth rating init
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("Users")/*.child(currentUser.getUid())*/;
+                mDatabase.child(currentUser.getUid()).child("Rate").setValue(0);
         mDatabase.child(currentUser.getUid()).child("Email").setValue(currentUser.getEmail());
     }
 
@@ -111,6 +128,16 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     public void myJobs(View view) {
         Intent intent = new Intent(this, ViewActiveJobsWithBidsActivity.class);
+        startActivity(intent);
+    }
+
+    public void myDriverJobs(View view) {
+        Intent intent = new Intent(this, ViewMyDriverJobsActivity.class);
+        startActivity(intent);
+    }
+
+    public void myBids(View view) {
+        Intent intent = new Intent(this, ViewMyBidsActivity.class);
         startActivity(intent);
     }
 

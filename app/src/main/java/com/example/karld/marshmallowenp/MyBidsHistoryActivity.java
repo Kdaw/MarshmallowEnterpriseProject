@@ -1,7 +1,6 @@
 package com.example.karld.marshmallowenp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.graphics.Color;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,37 +22,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
-public class ViewAvailableJobsActivity extends AppCompatActivity {
+public class MyBidsHistoryActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    /**
-     * Implementation of the following was done using the information found at
-     * http://www.techotopia.com/index.php/A_Firebase_Realtime_Database_List_Data_Tutorial
-     * This describes how to fill a list view from a Firebase Realtime Database
-     */
+    private FirebaseUser currentUser ;
+
     private ArrayList<String> listItems = new ArrayList<>();
     private ArrayList<String> listKeys = new ArrayList<>();
     private ArrayAdapter<String> adapter;
-    private ListView availableJobs;
+    private ListView myBids;
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = fbDatabase.getReference("Posts");
+    private DatabaseReference dbRef = fbDatabase.getReference("Bids");
     private int itemSelected = 0;
     private String[] jobID = new String[1000];
-    public static final String MESSAGE = "message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_available_jobs);
-
+        setContentView(R.layout.activity_my_bids_history);
 
         //region matts code
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
         DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
 
         String uEmail = currentUser.getEmail();
@@ -110,39 +102,34 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
         });
         //endregion
 
-        Intent intent = new Intent(this, ViewAvailableJobDetailsActivity.class);
-
-        availableJobs = (ListView) findViewById(R.id.ListView_AvailableJobs);
+        myBids = (ListView) findViewById(R.id.ListView_MyBidsHistory);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
-        availableJobs.setAdapter(adapter);
-        availableJobs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        //availableJobs.setTextColor(Color.parseColor("#FFFFFF"));
-//        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                itemSelected = position;
-//
-//
-//            }
-//        });
+        myBids.setAdapter(adapter);
+        myBids.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+        addOpenChildEventListener();
 
-        addChildEventListener();
-
-        availableJobs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
+        myBids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
-            long id) {
-            Intent intent = new Intent(getApplicationContext(), ViewAvailableJobDetailsActivity.class); //------------------------------------ HERE
-            System.out.println("ID just before adding to intent " + jobID[position]);
-            String ident = jobID[position];
-            intent.putExtra("id", ident);
-            startActivity(intent);
+                                    long id) {
+                Intent intentOpen = new Intent(getApplicationContext(), ViewMyBidDetailsActivity.class);
+
+                String identOpen = jobID[position];
+                intentOpen.putExtra("id", identOpen);
+                startActivity(intentOpen);
             }
         });
+
+
     }
 
-    private void addChildEventListener() {
+    private void addOpenChildEventListener() {
+
         ChildEventListener cListener = new ChildEventListener() {
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -152,14 +139,17 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
                     System.out.println(jobID[itemSelected]);
                     String name = ds.getKey();
                     listKeys.add(name);
+                    String uID = currentUser.getUid().toString();
                     try {
-                        if (name.equals("title") && dataSnapshot.child("Active").getValue().equals(true)
-                                && dataSnapshot.child("Driver").getValue() == null) {
-                            adapter.add(dataSnapshot.child(name).getValue(String.class));
-
-                            itemSelected++;
+                        if (dataSnapshot.child("BidderID").getValue(String.class).equals(uID))
+                        {
+                            if (name.equals("PostTitle")) {
+                                adapter.add(dataSnapshot.child(name).getValue(String.class));
+                                itemSelected++;
+                            }
                         }
-                    } catch (NullPointerException e) { /* Cannot check snapshot before it exists */}
+                    } catch (NullPointerException e) { }
+
                 }
 
                 listKeys.add(dataSnapshot.getKey());
@@ -193,6 +183,7 @@ public class ViewAvailableJobsActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         };
         dbRef.addChildEventListener(cListener);
     }

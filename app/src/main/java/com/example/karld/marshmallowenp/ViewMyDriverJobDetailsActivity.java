@@ -8,23 +8,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class TermsOfService extends AppCompatActivity {
-    private PDFView pdfView;
+public class ViewMyDriverJobDetailsActivity extends AppCompatActivity {
+
     private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle   mToggle;
+    private ActionBarDrawerToggle mToggle;
+    private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = fbDatabase.getReference("Posts");
+    private String postedBy;
+    private DatabaseReference mRef;
+    private DatabaseReference bRef;
+    private Button button;
+    private String pTitle;
+    private String pID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_terms_of_service);
-
+        setContentView(R.layout.activity_view_my_driver_job_details);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         DatabaseReference mDatabaseUsers = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("Email");
@@ -48,7 +60,7 @@ public class TermsOfService extends AppCompatActivity {
         nV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks.
+                // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_home) {
@@ -72,21 +84,65 @@ public class TermsOfService extends AppCompatActivity {
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent( getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                }else if (id == R.id.nav_my_jobs) {
+                    Intent in = new Intent (getApplicationContext(), ViewActiveJobsWithBidsActivity.class);
+                    startActivity(in);
                 }
                 return true;
             }
         });
 
-        // Find required File to output onto display.
-        pdfView = (PDFView)findViewById(R.id.pdfView);
-        pdfView.fromAsset("TOS.pdf").load();
+
+        final TextView title = findViewById(R.id.textView_JobDetailTitle);
+        final TextView detail = findViewById(R.id.textView_JobDetailsDescription);
+        final TextView pickup = findViewById(R.id.textView_JobDetailsPickup);
+        final TextView dropoff = findViewById(R.id.textView_JobDetailsDropoff);
+
+
+
+
+        Intent intentExtra = getIntent();
+
+        final String postID = intentExtra.getStringExtra("id");
+        pID = postID;
+        System.out.println("Intent section " + postID);
+
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println(postID);
+                DataSnapshot ds = dataSnapshot.child(postID);
+                String sTitle ="Title: " + ds.child("title").getValue(String.class);
+                pTitle = ds.child("title").getValue(String.class);
+                String sDetails ="Details: " + ds.child("details").getValue(String.class);
+                String sPickup ="Pickup From: " + ds.child("pickup").getValue(String.class);
+                String sDropoff ="Deliver to: " + ds.child("dropoff").getValue(String.class);
+                String sDistance ="Route Distance: " + ds.child("distance").getValue(String.class);
+                postedBy = ds.child("User").getValue(String.class);
+                System.out.println(sTitle);
+                title.setText(sTitle);
+                detail.setText(sDetails);
+                pickup.setText(sPickup);
+                dropoff.setText(sDropoff);
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
-    //links button on TOS to the Settings activity
-    public void goToAnActivity(View view) {
+
+    public void markComplete(View v) {
+        dbRef.child(pID).child("Completed").setValue(true);
+        Toast.makeText(this, "Job Completed Successfully",
+              Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     // Enables Nav menu click -  Allows for both slide and on click access.
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

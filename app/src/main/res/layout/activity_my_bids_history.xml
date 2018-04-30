@@ -4,45 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.karld.marshmallowenp.ViewAvailableJobsActivity"
     android:background="@drawable/gradient"
+    tools:context="com.example.karld.marshmallowenp.MyBidsHistoryActivity"
     android:id="@+id/drawerLayout">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ListView
+            android:id="@+id/ListView.MyBidsHistory"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView.JobHistorytitle" />
+
         <TextView
-            android:id="@+id/textView.AvailableJobs"
+            android:id="@+id/textView.JobHistorytitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@string/text_view_available_jobs"
+            android:text="@string/textview_MyBidsHistory"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:textColorHint="@color/common_google_signin_btn_text_dark_default"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ListView
-            android:id="@+id/ListView.AvailableJobs"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/background_light"
-            android:isScrollContainer="false"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView.AvailableJobs" />
-
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

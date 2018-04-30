@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ViewBidDetailsActivity extends AppCompatActivity {
+public class ViewMyBidDetailsActivity extends AppCompatActivity {
 
     private FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = fbDatabase.getReference();
@@ -21,7 +21,7 @@ public class ViewBidDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_bid_details);
+        setContentView(R.layout.activity_view_my_bid_details);
 
         final TextView bidPostTitle = findViewById(R.id.textView_BidDetailsJobTitle);
         final TextView bidder = findViewById(R.id.textView_BidDetailsBidder);
