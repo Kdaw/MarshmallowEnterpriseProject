@@ -7,7 +7,7 @@
     android:background="@drawable/gradient">
 
     <ImageView
-        android:id="@+id/Person"
+        android:id="@+id/User_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView.NavUser"
