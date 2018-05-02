@@ -124,7 +124,6 @@ public class ViewMyDriverJobsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(getApplicationContext(), ViewMyDriverJobDetailsActivity.class);
-                System.out.println("ID just before adding to intent " + jobID[position]);
                 String ident = jobID[position];
                 intent.putExtra("id", ident);
                 startActivity(intent);

@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
+    //sign out from firebase
     @Override
     public void onClick(View v){
 
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         startActivity(intent);
     }
 
+    //todo fix local signout - only works if we clear user account from the device
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {

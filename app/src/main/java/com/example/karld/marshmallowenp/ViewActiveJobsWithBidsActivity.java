@@ -112,6 +112,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
             }
         });
 
+        //Set up listView for one option choice without any radial buttons
         availableJobsWithBids = (ListView) findViewById(R.id.ListView_ViewActiveWithBids);
         adapterWithBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItemsWithBids);
         availableJobsWithBids.setAdapter(adapterWithBids);
@@ -119,6 +120,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
 
         addChildEventListenerBids();
 
+        //get JobID and load details when item in list is clicked
         availableJobsWithBids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -131,6 +133,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
             }
         });
 
+        //Set up listView for one option choice without any radial buttons
         availableJobsNoBids = (ListView) findViewById(R.id.ListView_ViewActiveNoBids);
         adapterNoBids = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItemsNoBids);
         availableJobsNoBids.setAdapter(adapterNoBids);
@@ -138,6 +141,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
 
         addChildEventListenerNoBids();
 
+        //Get JobID and load details when item in list is clicked
         availableJobsNoBids.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -166,6 +170,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
                     listKeysWithBids.add(name);
                     if(dataSnapshot.child("PostOwner").getValue(String.class).equals(currentUser.getUid())) {
                         if (name.equals("PostTitle")) {
+                            //Format String, could be done better with a String builder - look at when refactoring
                             adapterWithBids.add(dataSnapshot.child(name).getValue(String.class) + "\t \t \t BID = £" + dataSnapshot.child("BidValue").getValue(Long.class));
                             itemSelectedWithBids++;
                         }
@@ -220,8 +225,8 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
 
                     String name = ds.getKey();
                     listKeysNoBids.add(name);
-                    //TODO try catch for null reference, ignore if null passed? -- see notebook
-                    //edit after presentation to attempt fixes... Only crashes on the initial runthrough!!!
+
+                    //try catch to solve issue where snapshot can be checked from elsewhere before it exists
                     try {
                         if (dataSnapshot.child("User").getValue(String.class).equals(currentUser.getUid())
                                 && dataSnapshot.child("HasBids").getValue(boolean.class) == false) {

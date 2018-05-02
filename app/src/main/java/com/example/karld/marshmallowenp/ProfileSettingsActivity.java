@@ -78,6 +78,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
 
+        //set user and email
         String uEmail = currentUser.getEmail();
         String uName = currentUser.getDisplayName();
 

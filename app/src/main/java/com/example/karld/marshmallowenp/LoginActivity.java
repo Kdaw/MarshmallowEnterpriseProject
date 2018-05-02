@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
 
     }
 
+    //Takes the user to the home page after successful login
     private void loadHome() {
         Intent intent = new Intent(this, MainActivity.class);
 
@@ -97,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
 
     }
 
+    //Button event listener for login
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -108,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     }
 
 
+    //allows Google client which is used for firebase instance
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -131,10 +134,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                // ...
+                // Unsuccessful login returns user to login page, consider adding message to user
             }
         }
 
+        //deprecated code below
         /*// Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
@@ -147,6 +151,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
+        //Connects Google user to firebase
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
