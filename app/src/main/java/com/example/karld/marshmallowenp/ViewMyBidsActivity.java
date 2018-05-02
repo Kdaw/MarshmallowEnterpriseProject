@@ -86,7 +86,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intentOpen = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
+                Intent intentOpen = new Intent(getApplicationContext(), ViewMyBidDetailsActivity.class);
                 System.out.println("BLAH BLAH BLAH _____________________________" + openJobID[position]);
                 String identOpen = openJobID[position];
                 intentOpen.putExtra("id", identOpen);
@@ -98,7 +98,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intentAccepted = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
+                Intent intentAccepted = new Intent(getApplicationContext(), ViewMyBidDetailsActivity.class);
                 System.out.println(  "ARRAY NULL?????? ________________________" + acceptedJobID[0]);
                 System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON" + acceptedJobID[position]);
                 String identAccepted = acceptedJobID[position];

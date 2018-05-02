@@ -131,27 +131,24 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         });
 
         // Profile Picture Uploads ---------------------------------------------------------------
-        mButtonChooseImage = findViewById(R.id.Pick_image);
-        mButtonUpload = findViewById(R.id.button_upload);
-        mImageView = findViewById(R.id.image_view);
-        mProgressBar = findViewById(R.id.progress_bar);
-        mStorageRef = FirebaseStorage.getInstance().getReference("UserPictures").child(currentUser.getUid());
 
-
-        mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFileChooser();
-
-            }
-        });
-        mButtonUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadFile();
-
-            }
-        });
+//        mStorageRef = FirebaseStorage.getInstance().getReference("UserPictures").child(currentUser.getUid());
+//
+//
+//        mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openFileChooser();
+//
+//            }
+//        });
+//        mButtonUpload.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                uploadFile();
+//
+//            }
+//        });
     }
 
     public void openFileChooser() {
