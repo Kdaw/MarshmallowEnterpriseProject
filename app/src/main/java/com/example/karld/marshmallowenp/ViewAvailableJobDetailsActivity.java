@@ -115,6 +115,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
         System.out.println("Intent section " + postID);
 
 
+        //capture data from Firebase in a Snapshot to allow use in app
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -147,6 +148,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
 
         Intent intentExtra = getIntent();
 
+        //capture current user ID and other users ID from intent
         String cUserID = currentUser.getUid();
         String cPostID = intentExtra.getStringExtra("id");
         EditText bidValue = findViewById(R.id.editText_JobDetailsBidValue);
@@ -166,7 +168,7 @@ public class ViewAvailableJobDetailsActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Your bid has been posted successfully", Toast.LENGTH_LONG).show();
 
-
+        //return to previous page
         Intent returnIntent = new Intent(this, ViewAvailableJobsActivity.class);
         startActivity(returnIntent);
     }

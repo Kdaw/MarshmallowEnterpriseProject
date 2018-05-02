@@ -146,9 +146,6 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
         titleInput = (EditText) findViewById(R.id.editText_Title);
         detailInput = (EditText) findViewById(R.id.editText_Details);
-//        PickupLocationInput = (EditText) findViewById(R.id.editText_Pickup);
-//        DropoffLocationInput = (EditText) findViewById(R.id.editText_Dropoff);
-//        DistanceInput = (EditText) findViewById(R.id.editText_Distance);
         pickupFrom = (TextView) findViewById(R.id.textView_PPPickupLocation);
         deliverTo = (TextView) findViewById(R.id.textView_PPDropoffLocation);
 
@@ -157,6 +154,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
 
             @Override
             public void onClick(View v) {
+                //Creates a unique identifier in Firebase and sets it locally for pushing more details
                 mRef = FirebaseDatabase.getInstance().getReference().child("Posts").push();
 
 
@@ -181,6 +179,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
                 } catch (NullPointerException e) { /* These haven't been set, null check comes later */}
 
 
+                //Ensures pickup and dropoff have been set
                 if (!pickup.equals("Pickup From") || !dropoff.equals("Deliver To")) {
                     mRef.child("title").setValue(title);
                     mRef.child("details").setValue(details);
@@ -214,7 +213,7 @@ public class CreatePostActivity extends AppCompatActivity /*implements View.OnCl
         return super.onOptionsItemSelected(item);
     }
 
-    //PlacePicker buttons and code
+    //PlacePicker buttons and intent builders (preset code from Google to use their API
     public void selectPickupLocation(View v) {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
