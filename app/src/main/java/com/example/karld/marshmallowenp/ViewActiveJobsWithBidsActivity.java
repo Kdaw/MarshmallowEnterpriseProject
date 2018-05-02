@@ -166,7 +166,7 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
                     listKeysWithBids.add(name);
                     if(dataSnapshot.child("PostOwner").getValue(String.class).equals(currentUser.getUid())) {
                         if (name.equals("PostTitle")) {
-                            adapterWithBids.add(dataSnapshot.child(name).getValue(String.class) + "\t BID = £" + dataSnapshot.child("BidValue").getValue(Long.class));
+                            adapterWithBids.add(dataSnapshot.child(name).getValue(String.class) + "\t \t \t BID = £" + dataSnapshot.child("BidValue").getValue(Long.class));
                             itemSelectedWithBids++;
                         }
                     }
