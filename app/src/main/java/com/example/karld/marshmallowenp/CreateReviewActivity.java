@@ -51,11 +51,13 @@ public class CreateReviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //Creates the create review activity after the completion of delivery to it's intended destination
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_review);
         final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        int numOfStars = ratingBar.getNumStars();
-        ratingBar.setRating((float) 1);
+        int numOfStars = ratingBar.getNumStars();   // holds the star value
+        ratingBar.setRating((float) 1);     //Sets rating to 1 star as default
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -112,25 +114,30 @@ public class CreateReviewActivity extends AppCompatActivity {
         });
 
 
+        //Stores the information in the edit text field
         reviewInput = (EditText) findViewById(R.id.Review_Text);
+        //Button Submission of the review
         submitBtn = (Button) findViewById(R.id.Submit_Review);
 
+        //Onclick listener to send the review page to the firebase instance and store the data once the submit button has been pressed
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Pushes the data to the named node in the database
                 mRef = FirebaseDatabase.getInstance().getReference().child("Review").push();
 
-                String reviewId = mRef.toString();
+                String reviewId = mRef.toString(); //Converts the data to a string for human understanding
                 String review_id = reviewId.replace(removeLink,"");
 
                 review = reviewInput.getText().toString();
-
+                //Sets the values under each node in the database
                 mRef.child("Review").setValue(review);
                 mRef.child("User").setValue(getUserID());
                 mRef.child("Rating").setValue(ratingBar.getRating());
-                mRef.child("DatePosted").setValue(simpleDateFormat.format(date).toString());
+                mRef.child("DatePosted").setValue(simpleDateFormat.format(date).toString()); //Adds a timestamp
 
+                //Toast variables to show the user that the review has been updated to the database
                 String totalStars = "Total Stars:: " + ratingBar.getNumStars();
                 String rating = "Rating:: " + ratingBar.getRating();
                 Toast.makeText(getApplicationContext(),totalStars + "\n" + rating, Toast.LENGTH_LONG).show();
@@ -138,7 +145,7 @@ public class CreateReviewActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), ViewPostActivity.class);
                 intent.putExtra("Review_ID", review_id);
                 startActivity(intent);
-                finish();
+                finish();   //Finishes the activity and removes it from memory
             }
         });
     }
