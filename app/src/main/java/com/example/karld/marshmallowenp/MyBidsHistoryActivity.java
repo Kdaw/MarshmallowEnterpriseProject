@@ -128,6 +128,7 @@ public class MyBidsHistoryActivity extends AppCompatActivity {
 
         ChildEventListener cListener = new ChildEventListener() {
 
+            //captures data from firebase in a dataSnapshot
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
             @Override
