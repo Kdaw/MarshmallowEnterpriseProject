@@ -133,6 +133,7 @@ public class MyJobsHistoryActivity extends AppCompatActivity {
 
     }
 
+    //Creates a dataSnapshot of the Firebase data to allow it to be used
     private void addChildEventListener() {
         ChildEventListener cListener = new ChildEventListener() {
             @Override

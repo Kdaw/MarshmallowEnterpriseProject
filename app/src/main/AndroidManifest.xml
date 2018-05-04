@@ -3,7 +3,7 @@
     package="com.example.karld.marshmallowenp">
     Allows for reading Files--------------------------------------------------
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- PERMISSIONS -->
     <!-- Location services -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -62,12 +62,11 @@
         <activity android:name=".MyBidsHistoryActivity" />
         <activity android:name=".ViewMyBidDetailsActivity" />
         <activity android:name=".ViewMyJobDetailsActivity" />
-        <activity android:name=".ViewMyDriverJobDetailsActivity"></activity>
+        <activity android:name=".ViewMyDriverJobDetailsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAt90byXlZrt6oG5O8OZMOR9fu9B0NTvAI"/>
-
+            android:value="AIzaSyAt90byXlZrt6oG5O8OZMOR9fu9B0NTvAI" />
 
     </application>
 

@@ -59,13 +59,15 @@ public class ViewBidDetailsActivity extends AppCompatActivity {
                 DataSnapshot ds = dataSnapshot.child("Bids").child(bid);
                 String driver = dataSnapshot.child("Bids").child(bid).child("BidderID").getValue(String.class);
                 String aPostTitle = ds.child("PostID").getValue(String.class);
+                //accept current bid
                 dbRef.child("Bids").child(bid).child("Accepted").setValue(true);
                 for (DataSnapshot loopDs : dataSnapshot.child("Bids").getChildren()){
-
+                //loop through all the entries and set all bids for that post to inactive
                     String bidId = loopDs.child("PostID").getValue(String.class);
                     if(bidId.equals(aPostTitle))
                         dbRef.child("Bids").child(loopDs.getKey()).child("Active").setValue(false);
                 }
+                //used to allow list population for driver jobs
                 dbRef.child("Posts").child(aPostTitle).child("Driver").setValue(driver);
             }
 

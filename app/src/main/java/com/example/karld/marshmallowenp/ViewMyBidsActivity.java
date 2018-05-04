@@ -64,6 +64,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ViewMyBidsActivity.class);
 
+        //create 2 list views to separate jobs by with/without bids
         openJobs = (ListView) findViewById(R.id.ListView_viewMyOpenBids);
             openAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, openListItems);
             openJobs.setAdapter(openAdapter);
@@ -86,8 +87,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intentOpen = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
-                System.out.println("BLAH BLAH BLAH _____________________________" + openJobID[position]);
+                Intent intentOpen = new Intent(getApplicationContext(), ViewMyBidDetailsActivity.class);
                 String identOpen = openJobID[position];
                 intentOpen.putExtra("id", identOpen);
                 startActivity(intentOpen);
@@ -98,12 +98,9 @@ public class ViewMyBidsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent intentAccepted = new Intent(getApplicationContext(), ViewBidDetailsActivity.class);
-                System.out.println(  "ARRAY NULL?????? ________________________" + acceptedJobID[0]);
-                System.out.println("USE FOR TESTING WHEN I UNDERSTAND WHATS GOING ON" + acceptedJobID[position]);
+                Intent intentAccepted = new Intent(getApplicationContext(), ViewMyBidDetailsActivity.class);
                 String identAccepted = acceptedJobID[position];
                 intentAccepted.putExtra("id", identAccepted);
-                System.out.println(intentAccepted.toString());
                 startActivity(intentAccepted);
             }
         });
@@ -115,10 +112,7 @@ public class ViewMyBidsActivity extends AppCompatActivity {
      * Child event Listener for the Open Jobs list view
      */
 
-    //todo MAKE THIS WORK FOR WHAT I NEED IT TO -- NEEDS MAJOR CHANGING -- EG LINE 130 IN VIEWAVAILABLEJOBSACTIVITY
-    //todo getting null pointers for passing through the intent and also values in array are weirdly all null
-    //todo FIGURE THIS OUT
-    //todo think its done
+
 
     private void addAcceptedChildEventListener() {
         ChildEventListener cListener = new ChildEventListener() {
