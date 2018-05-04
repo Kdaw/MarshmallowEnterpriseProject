@@ -168,13 +168,15 @@ public class ViewActiveJobsWithBidsActivity extends AppCompatActivity {
 
                     String name = ds.getKey();
                     listKeysWithBids.add(name);
-                    if(dataSnapshot.child("PostOwner").getValue(String.class).equals(currentUser.getUid())) {
-                        if (name.equals("PostTitle")) {
-                            //Format String, could be done better with a String builder - look at when refactoring
-                            adapterWithBids.add(dataSnapshot.child(name).getValue(String.class) + "\t \t \t BID = £" + dataSnapshot.child("BidValue").getValue(Long.class));
-                            itemSelectedWithBids++;
+                    try {
+                        if(dataSnapshot.child("PostOwner").getValue(String.class).equals(currentUser.getUid())) {
+                            if (name.equals("PostTitle")) {
+                                //Format String, could be done better with a String builder - look at when refactoring
+                                adapterWithBids.add(dataSnapshot.child(name).getValue(String.class) + "\t \t \t BID = £" + dataSnapshot.child("BidValue").getValue(Long.class));
+                                itemSelectedWithBids++;
+                            }
                         }
-                    }
+                    } catch (NullPointerException e) { }
                 }
 
                 listKeysWithBids.add(dataSnapshot.getKey());
